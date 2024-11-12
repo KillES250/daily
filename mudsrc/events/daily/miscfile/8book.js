@@ -43,6 +43,11 @@ module.exports = async function (data) {
             }
             if(data.data.includes('放到书架上面')){
                 cmd(this.userStore.data);
+                return;
+            }
+            if(data.data.includes('只有秘籍，进阶秘籍，武道秘籍可以放在书架上面。')){
+                this.booksindex++;
+                cmd(this.userStore.data);
             }
             break;
         case 'msg':
