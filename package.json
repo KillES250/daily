@@ -1,25 +1,28 @@
 {
-  "name": "daily",
-  "private": true,
-  "version": "0.0.0",
-  "main": "index.js",
-  "description": "武神传说日常任务",
+  "name": "wsmud6",
+  "version": "1.0.0",
+  "main": "server/server.js",
   "scripts": {
-    "cli": "node source/utils/cli.js"
+    "start": "node server/server.js",
+    "stop": "node server/stop-server.js",
+    "runall": "node mudsrc/run/all.js",
+    "killall": " node mudsrc/run/killall.js",
+    "rundaily": "node mudsrc/run/_daily.js",
+    "runwar": "node mudsrc/run/_war.js",
+    "runweek": "node mudsrc/run/_week.js"
   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
   "dependencies": {
-    "axios": "^0.26.1",
-    "chalk": "2.4.1",
-    "commander": "^9.0.0",
-    "cron-parser": "^4.6.0",
-    "dayjs": "^1.10.8",
-    "inquirer": "^8.2.1",
+    "axios": "^1.7.7",
+    "chalk": "^2.4.1",
+    "dayjs": "^1.11.13",
+    "express": "^4.21.0",
     "js-yaml": "^4.1.0",
-    "json5": "^2.2.0",
-    "cron-parser": "^4.2.0",
-    "node-schedule": "^2.1.0",
-    "prompts": "^2.4.2",
-    "qs": "^6.10.3",
-    "ws": "^8.5.0"
+    "json5": "^2.2.3",
+    "node-schedule": "^2.1.1",
+    "ws": "^8.18.0"
   }
 }

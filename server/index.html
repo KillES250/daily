@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>没有梦想跟咸鱼有什么区别</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        display: flex;
+        height: 100vh;
+        min-height: 100vh;
+        background-color: #f0f0f0;
+    }
+    .main-left,
+    .main-mid,
+    .main-right {
+        flex-basis: 550px;
+        height: 100vh;
+        flex-shrink: 0;
+        margin: 0 auto;
+        display: flex;
+        background-color: #f0f0f0;
+        justify-content: center;
+    }
+
+    .left {
+        width: 20%;
+        background-color: #ccc;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        padding-top: 6px;
+        padding-bottom: 6px;
+        padding-left: 6px;
+    }
+
+    .left button {
+        flex: 1; 
+        background-color: #ffffff; 
+        border-width: 1px; 
+        border-style: solid; 
+        border-color: #ccc; 
+        text-align: center; 
+        cursor: pointer;
+        font-size:x-large;
+        padding: 2px;
+        font-weight: 600;
+        font-style: oblique;
+    }
+    .right {
+        width: 80%;
+        height: 100%;
+        background-color: #ccc;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        overflow: hidden;
+        padding: 6px;
+    }
+
+    .right h1{
+        height: 5%;
+        text-align: center;
+    }
+
+    .read, .login, .config, .task, .items {
+        flex: 1;
+        background-color: #ccc;
+        padding: 5px;
+        box-sizing: border-box;
+    }
+    .username, .password, .server, .commit{
+        display: flex;
+        padding: 3px 2px;
+        justify-content: end;
+        height: 40px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .username, .password, .server, .add_allroles{
+        display: flex;
+        padding: 3px 2px;
+        justify-content: space-between;
+        height: 40px;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .username, .password, .server, .label{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: x-large;
+        font-weight: 600;
+    }
+    .add_allroles button{
+        width: 30%;
+        font-size: large;
+    }
+    .commit button{
+        width: 100%;
+        font-size: x-large;
+        font-weight: 600;
+    }
+    .username .label,
+    .password .label,
+    .server .label {
+        display: flex;
+        flex-shrink: 0;
+        font-size: x-large;
+        align-items: center;
+        margin: 0;
+        height: 100%;
+        font-weight: 600;
+        margin: 0 5% 0 0;
+    }
+    .username #username,
+    .password #password,
+    .server #server {
+        width: 100%;
+        font-size: 25px;
+        
+    }
+    
+    .usernamelist{
+        display: flex;
+        flex-direction: column;
+        padding: 5px;
+        font-size: x-large;
+        font-weight: 600;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    
+    .usernamelist .role-item{
+        display: flex;
+        width: 95%;
+        justify-content: space-between;
+        font-size: large;
+        border: 1px solid #000000;
+        margin-bottom: 5px;
+        background: #ededed;
+        color: #000;
+        padding-left: 5%;
+    }
+    
+    .role-item .add-button{
+        font-size: x-large;
+        background: white;
+        border-style: none;
+        width: 15%;
+    }
+
+    .roleslist{
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        max-block-size: 86vh;
+        border: 1px solid #000000;
+        margin-left: 5%;
+        margin-right: 5%;
+    }
+    .roleslist .roleName{
+        display: flex;
+        justify-content: space-between;
+        border:1px solid #000000;
+        font-size: larger;
+        margin-bottom: 4px;
+        font-weight: 600;
+        border-left: none;
+        background: #ededed;
+        padding: 2% 5% 2% 15%;
+        max-height: 30px;
+    }
+    .roleName .del-button{
+        min-width: 30px;
+        min-height: 30px;
+        background-color: #e85151;
+        border-radius: 50%;
+        border: none;
+        color: white;
+        font-size: x-large;
+    }
+    .roleslist .roleName .lable:hover{
+        color: firebrick;
+        cursor: pointer;
+    }
+    .roleName .del-button:hover{
+        cursor: pointer;
+        background-color: green;
+    }
+    .task .taskup, 
+    .task .top,
+    .task .taskdown {
+        display: flex;
+        flex-direction: row;
+        padding: 5px;
+    }
+    .taskup .runtask,
+    .taskup .saveConfigs {
+        display: flex;
+        justify-content: center;
+        margin-inline: 2px;
+        width: 50%;
+    }
+    .taskdown .dailytime,
+    .taskdown .wartime,
+    .taskdown .weektime{
+        display: flex;
+        flex-direction: column;
+        width: 33%;
+        margin-inline: 2px;
+        height: 83vh;
+        overflow-y: auto;
+    }
+    .dailytime button,
+    .wartime button,
+    .weektime button{
+        font-size: large;
+        font-weight: 600;
+        margin-bottom: 5px;
+    }
+    .timedataofdaily,
+    .timedataofwar,
+    .timedataofweek{
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        max-height: 88vh;
+    }
+    .timedataofdaily button,
+    .timedataofwar button,
+    .timedataofweek button{
+        font-size: large;
+    }
+    .timebox{
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        margin-bottom: 7px;
+        gap: 2px;
+    }
+    .timebox input[type="text" i] {
+        display: flex;
+        width: 70%;
+        font-size: medium;
+        text-align: center;
+        font-weight: 600;
+        height: 100%;
+    }
+    .timebox button{
+        display: flex;
+        width: 30%;
+        height: 100%;
+        justify-content: center;
+        margin: 0;
+        box-sizing: content-box;
+    }
+    .modal-warning {
+        display: none;
+        position: fixed;
+        width: 40%;
+        height: 15%;
+        top: 40%;
+        background-color: #ffffff;
+        border: 0.1px solid #000000;
+    }
+    .modal-warning .modal-content{
+        display: flex;
+        flex-direction: column;
+        height: 70%;
+    }
+    .modal-warning .modal-button{
+        display: flex;
+        justify-content: space-evenly;
+        margin-left: 1px;
+        margin-right: 1px;
+    }
+    .modal-warning .modal-button button{
+        font-size: initial;
+    }
+    .modal-warning .modal-content .modal-title{
+        display: flex;
+        background: #ac7ab5;
+        color: white;
+        padding: 4px;
+    }
+    .modal-warning .modal-content .modal-msg{
+        display: grid;
+        height: 100%;
+        justify-content: center;
+        align-content: space-around;
+    }
+    .rolseConfigs{
+        display: flex;
+        flex-direction: column;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+    .rolseConfigs .currentRoleName{
+        display: flex;
+        justify-content: space-between;
+        height: 35px;
+        font-size: large;
+        font-weight: 600;
+        align-items: center;
+        margin: 0 12% 0% 10%;
+    }
+    .rolseConfigs .currentRoleName button{
+        font-size: large;
+        font-weight: 600;
+    }
+    .rolseConfigs #optionsForm{
+        display: flex;
+        flex-direction: column;
+        background: #ededed;
+        font-weight: 600;
+        height: 85vh;
+        max-height: 85vh;
+        overflow-x: hidden;
+        overflow-y: scroll;
+        justify-content: flex-start;
+        padding-top: 20px;
+    }
+    .rolseConfigs #optionsForm input[type="text"]{
+        width: 90%;
+    }
+    .rolseConfigs #optionsForm select{
+        width: 120px;
+        min-width: 120px;
+        max-height: 30px;
+        font-size: large;
+        text-align: center;
+    }
+    .rolseConfigs #optionsForm .option-group{
+        display: flex;
+        justify-content: space-between;
+        margin: 1% 10% 0% 10%;
+    }
+    .rolseConfigs #optionsForm .option-group-for{
+        display: flex;
+        flex-direction: column;
+        margin: 1% 10% 0% 10%;
+    }
+    .rolseConfigs #optionsForm .option-group-for2{
+        display: flex;
+        justify-content: space-between;
+        margin: 0.5% 0 0.5% 10%;
+        font-weight: 500;
+    }
+    /* .rolseConfigs #optionsForm .option-group-for2 input[type="text"]{
+        display: flex;
+    } */
+    
+    
+    .choiceRoles {
+        display: none;
+        background-color: #ccc;
+        width: 100%;
+        max-height: 100%
+    }
+    
+    .choiceRoles .top {
+        display: flex;
+        flex-wrap: wrap;
+        height: 90vh;
+        padding: 0 5% 0 5%;
+        overflow: hidden visible;
+        align-content: initial;
+        border: 1px solid;
+    }
+    .choiceRoles .top .role-item-choice{
+        min-width: 25%;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+    }
+    .choiceRoles .top .role-item-choice input[type="checkbox"] {
+        width: 20px; 
+        height: 20px; 
+    }
+    .choiceRoles .bottom{
+        display: flex;
+        height: calc(10% - 5px);
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 5% 0 5%;
+        gap: 15px;
+        border: 1px solid;
+    }
+    .choiceRoles .bottom button{
+        font-size: larger;
+        font-weight: 600;
+    }
+    .task .top .title{
+        display: inline-flex;
+        font-size: larger;
+        width: 15%;
+        max-width: 15%;
+        height: 30px;
+        max-height: 30px;
+        overflow: hidden;
+        justify-content: space-around;
+        border:0.5px #000000 solid;
+        background-color: #efefef;
+    }
+    .task .top input{
+        display: inline-flex;
+        flex: 1;
+        font-size: large;
+        width: 70%;
+        max-width: 70%;
+    }
+    .task .top button{
+        display: flex;
+        width: 15%;
+        max-width: 15%;
+        align-items: center;
+        justify-content: center;
+        font-size: large;
+        font-weight: 500;
+        overflow: hidden;
+    }
+    .items .bottom{
+        display: flex;
+        flex-wrap: wrap;
+        overflow-y: scroll;
+        height: 90vh;
+        max-height: 90%;
+        justify-content: space-between;
+        border: 1px solid #000; 
+    }
+
+    .items .bottom .itmes-for {
+        display: flex;
+        justify-content: space-between; 
+        flex: 0 0 49%;
+        background-color: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 1px; 
+        height: 20px;
+        max-height: 20px;
+    }
+
+    .items .bottom .itmes-for span {
+        flex: 1;
+        width:70%;
+        max-width: 70%;
+        font-size: small;
+    }
+
+    .items .bottom .itmes-for select {
+        flex: 1; 
+        width:30%;
+        max-width: 30%;
+        font-size: small;
+    }
+    .items .top{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-size: smaller;
+        justify-content: space-between;
+        height: 10%;
+        max-height: 10%;
+        font-size: 10px;
+    }
+    .items .top .stats-container{
+        display: flex;
+        justify-content: space-between;
+        width: 90%;
+        margin-right: 1%;
+    }
+    .stats-container p {
+        margin: 0;
+        font-size: 10px;
+    }
+</style>
+<body class="body">
+    <!-- <div class = "main-left">
+    </div> -->
+    <div class="main-mid">
+        <div class="left">
+            <button id="readConfig">读取配置</button>
+            <button id="addRole">添加角色</button>
+            <button id="roleConfig">角色配置</button>
+            <button id="itemsConfig">物品配置</button>
+            <button id="executeTask">任务配置</button>
+        </div>
+        <div class="right">
+            <div class="read" hidden>
+                <h1>角色列表</h1>
+                <div class="roleslist">
+                    <!-- 动态渲染 -->
+                </div>
+            </div>
+            <div class="login" hidden>
+                <h1>登录</h1>
+                    <div class="username">
+                        <span class="label">账&nbsp;&nbsp;&nbsp;&nbsp;号:</span>
+                        <input type="text" id="username" name="username" required>
+                    </div>
+                    <div class="password">
+                        <span class="label">密&nbsp;&nbsp;&nbsp;&nbsp;码:</span>
+                        <input type="text" id="password" name="password" required>
+                    </div>
+                    <div class="server">
+                        <span class="label">选&nbsp;&nbsp;&nbsp;&nbsp;区:</span>
+                        <select id="server" name="server" required>
+                            <!-- 动态生成的选项 -->
+                        </select>
+                    </div>
+                    <div class="commit" id="login">
+                        <button type="commit">登录</button>
+                    </div>
+                    <div class="add_allroles" id="add_allroles">
+                        <span class="label">角色列表:</span>
+                        <button type="add_allroles">添加所有</button>
+                    </div>
+                    <div class="usernamelist">…………
+                        <!-- 动态生成页面 -->
+                    </div>
+            </div>
+            <div class="config" hidden>
+                <h1>配置</h1>
+                <div class="rolseConfigs">
+                    <div class="currentRoleName">
+                        <span class="rolenName">角色名:
+                            <span id="rolenName">空</span>
+                        </span>
+                        <button id="applyToRoles">选择应用</button>
+                    </div>
+                    <form id="optionsForm">
+                        <div class="option-group">
+                            <label for="loginCommand">登入执行:</label>
+                            <input type="text" name="loginCommand" id="loginCommand">
+                        </div>
+                        <div class="option-group">
+                            <label for="logoutCommand">登出执行:</label>
+                            <input type="text" name="logoutCommand" id="logoutCommand">
+                        </div>
+                        <div class="option-group">
+                            <label for="redboss">首领:</label>
+                            <select id="redboss" name="redboss">
+                                <option value="null">不打</option>
+                                <option value="false">嗜血探龙</option>
+                                <option value="true">直接叫杀</option>
+                            </select>
+                        </div>
+                    
+                        <div class="option-group">
+                            <label for="leitai">擂台:</label>
+                            <select id="leitai" name="leitai" disabled>
+                                <option value="false">不报名</option>
+                                <option value="true">报名</option>
+                            </select>
+                        </div>
+                    
+                        <div class="option-group-for">
+                            <label>副本:</label>
+                            <div class="option-group-for2">
+                                <label for="first">扫荡禁地:</label>
+                                <select id="first" name="first">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="second">扫荡宗门:</label>
+                                <select id="second" name="second">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="third">扫荡副本:</label>
+                                <select id="third" name="third">
+                                    <option value="yz/lw/shangu" hard="0">树林</option>
+                                    <option value="yz/cuifu/caizhu" hard="0">财主家(普通)</option>
+                                    <option value="yz/cuifu/caizhu" hard="1">财主家(困难)</option>
+                                    <option value="yz/lmw/xiangzi1" hard="0">流氓巷</option>
+                                    <option value="yz/lcy/dating" hard="0">丽春院</option>
+                                    <option value="yz/by/damen" hard="0">兵营</option>
+                                    <option value="bj/zhuang/xiaolu" hard="0">庄府</option>
+                                    <option value="bj/ao/damen" hard="0">鳌拜府</option>
+                                    <option value="bj/tdh/hct" hard="0">天地会</option>
+                                    <option value="bj/shenlong/haitan" hard="0">神龙教</option>
+                                    <option value="bj/guanwai/damen" hard="0">关外</option>
+                                    <option value="cd/wen/damen" hard="0">温府</option>
+                                    <option value="cd/wudu/damen" hard="0">五毒教</option>
+                                    <option value="wuyue/hengshan/daziling" hard="0">恒山</option>
+                                    <option value="wuyue/qingcheng/shanlu" hard="0">青城山</option>
+                                    <option value="wuyue/henshan/hengyang" hard="0">衡山</option>
+                                    <option value="wuyue/taishan/daizong" hard="0">泰山</option>
+                                    <option value="wuyue/songshan/taishi" hard="0">嵩山</option>
+                                    <option value="cd/yunmeng/senlin" hard="0">云梦沼泽</option>
+                                    <option value="taohua/haitan" hard="0">桃花岛(普通)</option>
+                                    <option value="taohua/haitan" hard="1">桃花岛(困难)</option>
+                                    <option value="baituo/damen" hard="0">白驼山</option>
+                                    <option value="xingxiu/xxh6" hard="0">星宿海</option>
+                                    <option value="mj/bhd/haibian" hard="0">冰火岛(普通)</option>
+                                    <option value="mj/bhd/haibian" hard="1">冰火岛(困难)</option>
+                                    <option value="huashan/yihua/shandao" hard="0">移花宫(普通)</option>
+                                    <option value="huashan/yihua/shandao" hard="1">移花宫(困难)</option>
+                                    <option value="murong/anbian" hard="0">燕子坞(普通)</option>
+                                    <option value="murong/anbian" hard="1">燕子坞(困难)</option>
+                                    <option value="heimuya/shangu" hard="0">黑木崖(普通)</option>
+                                    <option value="heimuya/shangu" hard="1">黑木崖(困难)</option>
+                                    <option value="lingjiu/shanjiao" hard="0">缥缈峰(普通)</option>
+                                    <option value="lingjiu/shanjiao" hard="1">缥缈峰(困难)</option>
+                                    <option value="mj/shanmen" hard="0">光明顶</option>
+                                    <option value="tianlong/damen" hard="0">天龙寺(普通)</option>
+                                    <option value="tianlong/damen" hard="1">天龙寺(困难)</option>
+                                    <option value="xuedao/shankou" hard="0">血刀门</option>
+                                    <option value="gumu/gumukou" hard="0">古墓派(普通)</option>
+                                    <option value="gumu/gumukou" hard="1">古墓派(困难)</option>
+                                    <option value="huashan/lunjian/leitaixia" hard="0">华山论剑</option>
+                                    <option value="xkd/shimen" hard="0">侠客岛</option>
+                                    <option value="chanzong/shanmen" hard="0">净念禅宗(普通)</option>
+                                    <option value="chanzong/shanmen" hard="1">净念禅宗(困难)</option>
+                                    <option value="cihang/shanmen" hard="0">慈航静斋(普通)</option>
+                                    <option value="cihang/shanmen" hard="1">慈航静斋(困难)</option>
+                                    <option value="yyg/ya" hard="0">阴阳谷</option>
+                                    <option value="zsd/damen" hard="0">战神殿(普通)</option>
+                                    <option value="zsd/damen" hard="1">战神殿(困难)</option>
+                                    <option value="saodang muyuan" hard="1">妖塔</option>
+                                </select>
+
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="fourth">副本偷渡:</label>
+                                <select id="fourth" name="fourth">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="option-group-for">
+                            <label>帮战:</label>
+                            <div class="option-group-for2">
+                                <label for="family">门派模式:</label>
+                                <select id="family" name="family" disabled>
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="gang">帮战模式:</label>
+                                <select id="gang" name="gang">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="leader">带帮模式:</label>
+                                <select id="leader" name="leader">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                        </div>
+                    
+                        <div class="option-group-for">
+                            <label>周常:</label>
+                            <div class="option-group-for2">
+                                <label for="xiangyang">守护襄阳:</label>
+                                <select id="xiangyang" name="xiangyang">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="yunbiao">美团外卖:</label>
+                                <select id="yunbiao" name="yunbiao">
+                                    <option value="false">否</option>
+                                    <option value="true">是</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="tazhu">挑战塔主:</label>
+                                <select id="tazhu" name="tazhu">
+                                    <option value="null">不打</option>
+                                    <option value="false">嗜血剑心</option>
+                                    <option value="true">直接叫杀</option>
+                                </select>
+                            </div>
+                            <div class="option-group-for2">
+                                <label for="yaoshen">挑战妖神:</label>
+                                <select id="yaoshen" name="yaoshen">
+                                    <option value="null">不打</option>
+                                    <option value="false">剑雨剑来</option>
+                                    <option value="true">十步魔刀</option>
+                                </select>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="items" hidden>
+                <div class="top">
+                    <span>分配统计:</span> 
+                    <div class="stats-container"></div>
+                </div>
+                <div class="bottom">
+                    <!-- 动态生成的选项 -->
+                </div>
+            </div>
+            <div class="task" hidden>
+                <div class="taskup">
+                    <button class="saveConfigs"><h1>保存当前配置</h1></button>
+                    <button class="runtask"><h1>挂起所有任务</h1></button>
+                </div>
+                <div class="top">
+                    <span class="title">推送:</span>
+                    <input type="text" name="pushtoken">
+                    <button class="push">保存</button>
+                </div>
+                <div class="taskdown">
+                    <div class="dailytime">
+                        <button class="rundaily">运行日常</button>
+                        <button class="addtime">添加时间</button>
+                        <div class="timedataofdaily">
+                            <!-- 动态生成页面 -->
+                        </div>
+                    </div>
+                    <div class="wartime">
+                        <button class="runwar">运行帮战</button>
+                        <button class="addtime">添加时间</button>
+                        <div class="timedataofwar">
+                            <!-- 动态生成页面 -->
+                        </div>
+                    </div>
+                    <div class="weektime">
+                        <button class="runweek">运行周常</button>
+                        <button class="addtime">添加时间</button>
+                        <div class="timedataofweek">
+                            <!-- 动态生成页面 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-warning">
+            <div class="modal-content">
+                <span class="modal-title">重要提示</span>
+                <span class="modal-msg" value="none">信息</span>
+            </div>
+            <div class="modal-button">
+                <button id="cancel">取消</button>
+                <button id="ok">确认</button>
+            </div>
+        </div>
+        <div class="choiceRoles">
+            <div class="top">
+                <!-- 动态渲染 -->
+            </div>
+            <div class="bottom">
+                <button id="choiceNone">返回</button>
+                <button id="choiceAll">全选</button>
+                <button id="choiceConfirm">应用到角色</button>
+            </div>
+        </div>
+    </div>
+    <!-- <div class = "main-right">
+    </div> -->
+    <script>
+        $(document).ready(function(){
+            const rightBoxArr = ['read', 'login', 'config', 'items', 'task'];
+            const leftButtonArr = $('.left button').map((_, el) => el.id).get();
+            const leftButtonBindArr = ['readConfig','addRole','executeTask','itemsConfig'];
+            // 绑定鼠标移入事件
+            function bindMouseOver(...selectors) {
+                let selectorString = Array.isArray(selectors) ? selectors.map(selector => `#${selector}`).join(', ') : `#${selectors}`;
+                $('.left').one('mouseover', selectorString, function() {
+                    const id = $(this).attr('id');
+                    $.post(`/api/${id}`, function(data) {
+                        if (id === 'addRole') {
+                            randerServerSelect(data.servers);
+                        } else if (id === 'readConfig') {
+                            randerRoles(data.readConfigResult);
+                        } else if (id === 'executeTask') {
+                            randerExecuteTask(data.executeTaskResult);
+                            $('input[name="pushtoken"]').val(data.executeTaskResult.pushpushpush);
+                        } else if (id === 'itemsConfig') {
+                            radnerallitems(data.items);
+                        }
+                    });
+                });
+            }
+            // 立即执行一次
+            bindMouseOver(...leftButtonBindArr);
+            // 检查时间格式
+            function checkTimeDataFormat(data) {
+                
+                const dailytimeRegex = /^(\d{2}:\d{2})$/;
+                const wartimeRegex = /^(\d{2}:\d{2})[\u4e00-\u9fa5]$/; // 匹配以一个汉字结尾的时间格式
+                const weektimeRegex = /^(1|2|3|4|5|6|7):\d{2}:\d{2}$/;
+                
+                const timeFields = [
+                    { field: 'dailytime', regex: dailytimeRegex },
+                    { field: 'wartime', regex: wartimeRegex },
+                    { field: 'weektime', regex: weektimeRegex }
+                ];
+                
+                for (const { field, regex } of timeFields) {
+                    const fieldValue = data[field] || '';
+                    if (fieldValue) {
+                        const values = fieldValue.split('|').filter(val => val !== '');
+                        for (const time of values) {
+                            if (!regex.test(time)) {
+                                return false;
+                            }
+                        }
+                    }
+                }
+                return true; 
+            }
+            // 获取填写的时间值
+            function getInputTimeValues(selector) {
+                return $(selector).map(function() {
+                    return $(this).val();
+                }).get().filter(val => val !== '').join('|').replace(/\|$/, '');
+            };
+            // 渲染警告消息的文本
+            function raderModalMsg(data) {
+                if (data === 'readConfig') {
+                    $('.modal-msg').text("该操作会读取<运行配置>到当前界面(覆盖)。");
+                    $(".modal-msg").attr("value", "loadConfig");
+                } else if (data === 'addRole') {
+                    $('.modal-msg').text("是否同步所有角色的密匙(token码)？");
+                    $(".modal-msg").attr("value", "upDateToken");
+                } else if (data === 'saveConfigs') {
+                    $('.modal-msg').text("该操作会将<当前配置>同步到<运行配置>中(覆盖)。");
+                    $(".modal-msg").attr("value", "saveConfigtmp");
+                } else if (data === 'executeTask') {
+                    $('.modal-msg').text("同步当前时间用于下次挂起任务。");
+                    $(".modal-msg").attr("value", "upDateAllTasktime");
+                }else if (data === 'roleConfig') {
+                    $('.modal-msg').text("移除所有角色，初始化文件(文件格式损坏时)");
+                    $(".modal-msg").attr("value", "initConfigtmp");
+                }else if (data === 'itemsConfig') {
+                    $('.modal-msg').text("下载当前物品策略匹配覆盖，位置根目录下");
+                    $(".modal-msg").attr("value", "saveItemsConfigs");
+                }
+                $('.left, .right').hide();
+                $('.modal-warning').css('display' ,'block');
+            };
+            // 渲染角色列表
+            function randerRoles(data){
+                const roles = data.roles
+                const $rolesList = $('.roleslist');
+                $rolesList.empty();
+                roles.forEach(role => {
+                    const item = $('<div class="roleName">').append(
+                        $('<span>', {
+                            class: 'lable',
+                            text: role.name,
+                            click: () => {
+                                setRoleData(role);
+                                showPage('roleConfig');
+                                $('#readConfig').trigger('mouseout');
+                                $('#roleConfig').trigger('mouseover');
+                            }
+                        })
+                    );
+                    const delButton = $('<button>', {
+                        class: 'del-button',
+                        text:'X',
+                        click: function(){
+                            const name = $(this).parent().text().replace('X','');
+                            item.remove();
+                            $(this).remove();
+                            $.post('/api/delRole',{name} ,function(data){
+                                console.log(data.message);
+                            });
+                        }
+                    })
+                    item.append(delButton);
+                    $rolesList.append(item);
+                })
+            };
+            // 从角色列表名字跳转到配置信息页面的数据设置方法
+            function setRoleData(data) {
+                $('#rolenName').text(data.name);
+                $('#loginCommand').text(data.loginCommand);
+                $('#logoutCommand').text(data.logoutCommand);
+                $('#redboss').val(data.redboss ? `${data.redboss}` : "null");
+                $('#leitai').val(`${data.leitai}`);
+                $('#first').val(`${data.dungeons.first}`);
+                $('#second').val(`${data.dungeons.second}`);
+                const third = data.dungeons.third.replace(/^(cr )|(\s*\d+\s*)$/g, '');
+                $('#fourth').val(`${data.dungeons.fourth}`);
+                $('#third').val(third);
+                $('#famiily').val(`${data.war.famiily}`);
+                $('#gang').val(`${data.war.gang}`);
+                $('#leader').val(`${data.war.leader}`);
+                $('#xiangyang').val(`${data.week.xiangyang}`);
+                $('#yunbiao').val(`${data.week.yunbiao}`);
+                $('#tazhu').val(data.week.tazhu ? `${data.week.tazhu}` : "null");
+                $('#yaoshen').val(data.week.yaoshen ? `${data.week.yaoshen}` : "null");
+            };
+            // 渲染分区列表
+            function randerServerSelect(servers) {
+                const $select = $('#server');
+                $select.empty(); 
+                servers.forEach(server => {
+                    const option = $('<option>', {
+                        value: 'ws://' + server.IP + ':' + server.Port,
+                        text: server.Name
+                    });
+                    $select.append(option);
+                });
+            };
+            // 渲染游戏服务器返回的角色列表
+            function randerUsernamelist(data,data2,data3) {
+                const $select = $('.usernamelist');
+                $select.empty();
+                if (data.length === 0) {
+                    $select.text('没有可以选择的角色，请先创建角色并完成教学')
+                    return;
+                }
+                data.forEach(role => {
+                    const item = $('<div>', {
+                        class: 'role-item',
+                        id: role.id,
+                        text: role.name
+                    });
+                    // 添加角色的项目
+                    const addButton = $('<button>', {
+                        class: 'add-button',
+                        text: '+',
+                        click: function () {
+                            const rolesinfo = {
+                                name: role.name,
+                                server: data2,
+                                token: data3 + " " + role.id,
+                                loginCommand: '',
+                                logoutCommand: '',
+                                canlogin: true,
+                                redboss: null,
+                                leitai: false,
+                                dungeons:{
+                                    first: false,
+                                    second: false,
+                                    third: "cr yz/lw/shangu 0",
+                                    fourth: false,
+                                },
+                                war:{
+                                    family: false,
+                                    gang: false,
+                                    leader: false,
+                                },
+                                week:{
+                                    xiangyang: false,
+                                    yunbiao: false,
+                                    tazhu: null,
+                                    yaoshen: null,
+                                }
+                            }
+                            $.post('api/addrole', rolesinfo, function(data){
+                                console.log(data);
+                            });
+                            $(this).remove();
+                        }
+                    });
+                    item.append(addButton);
+                    $select.append(item);
+                });
+            };
+            // 渲染时间选择框
+            function randertimebox(data, classname) {
+                const $class = $(`.${classname}`);
+                if (data.length !== 0) {
+                    $class.empty();
+                }else{
+                    const container = $('<div class="timebox">');
+                    const itembox = $('<input type="text" name="time" />').val('');
+                    const deleteButton = $('<button>', {
+                        class: 'delete-button',
+                        text: '删',
+                        click: function() {
+                            container.remove();
+                            $(this).remove();
+                        }
+                    });
+                    container.append(itembox,deleteButton);
+                    $class.append(container);
+                }
+                data.forEach(item => {
+                    const container = $('<div class="timebox">');
+                    const itembox = $('<input type="text" name="time" />').val(item);
+                    const deleteButton = $('<button>', {
+                        class: 'delete-button',
+                        text: '删',
+                        click: function() {
+                            container.remove();
+                            $(this).remove();
+                        }
+                    });
+                    container.append(itembox,deleteButton);
+                    $class.append(container);
+                });
+            };
+            // 渲染已经存在的时间数据
+            function randerExecuteTask(data) {
+                const dailyTime = data.dailytime.split('|').map(item => item.trim());;
+                const weekTime = data.weektime.split('|').map(item => item.trim());;
+                const warTime = data.wartime.split('|').map(item => item.trim());;
+                randertimebox(dailyTime,"timedataofdaily");
+                randertimebox(warTime,"timedataofwar");
+                randertimebox(weekTime,"timedataofweek");
+            };
+            // 渲染警告弹窗
+            function randerWarning(data) {
+                // 调用渲染文本函数
+                raderModalMsg(data);
+                // 绑定取消按钮逻辑
+                $('#cancel').one('click', function() {
+                    $('.modal-warning').css('display' ,'none');
+                    $('.left, .right').show();
+                });
+                // 绑定确认按钮逻辑
+                $('#ok').one('click', async function(data) {
+                    const order = $(".modal-msg").attr("value");
+                    let reqdata = {};
+                    if(order === "upDateAllTasktime"){
+                        reqdata = {
+                            dailytime: getInputTimeValues('.timedataofdaily :input'),
+                            wartime: getInputTimeValues('.timedataofwar :input'),
+                            weektime: getInputTimeValues('.weektime :input')
+                        }
+                    }
+                    if (order === "saveItemsConfigs") {
+                        const reqbody = await collectAllItems();
+                        const yamlContent = objectToYaml(reqbody);
+                        const blob = new Blob([yamlContent], { type: 'text/yaml' });
+                        const url = URL.createObjectURL(blob);
+                        const a = document.createElement('a');
+                        a.href = url;
+                        a.download = '物品数据.yaml';
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        URL.revokeObjectURL(url);
+                        $('.modal-warning').css('display' ,'none');
+                        $('.left, .right').show();
+                        return;
+                    }
+                    const checkDataFormat = checkTimeDataFormat(reqdata);
+                    if(checkDataFormat === true){
+                        // 这里会调用警告弹窗的三个路由post，如果req不为空则是时间路由请求。
+                        $.post(`/api/${order}`, reqdata, function(callback) {
+                            console.log(order)
+                            if(order === "loadConfig"){
+                                location.reload();
+                                return
+                            }
+                            alert(callback.message)
+                        });
+                    }else{
+                        alert("时间格式不正确，请重新输入");
+                    };
+                    $('.modal-warning').css('display' ,'none');
+                    $('.left, .right').show();
+                });
+            };
+            // 渲染物品界面
+            function radnerallitems(data) {
+                const $container = $('.items .bottom');
+                $container.empty();
+                // 遍历传入的data
+                $.each(data, (index, item) => {
+                    // 获取对象的键和值
+                    const key = Object.keys(item)[0];
+                    const value = item[key];
+
+                    const $itemFor = $('<div></div>').addClass('itmes-for');
+                    const $span = $('<span></span>').text(key);
+                    $itemFor.append($span);
+
+                    const $select = $('<select></select>');
+                    const options = [
+                        '丢弃',  '使用', '分解', '背包', '仓库', '书架', '随从1', '随从2', '随从3'
+                    ];
+
+                    options.forEach(optionText => {
+                        const $option = $('<option></option>').val(optionText).text(optionText);
+                        $select.append($option);
+                    });
+
+                    $select.val(value);
+                    $itemFor.append($select);
+                    $container.append($itemFor);
+                    // 即时渲染
+                    $select.change(updateStats);
+                });
+                // 立即统计渲染一次
+                updateStats();
+            };
+            // 统计物品使用情况函数(上方即时渲染)
+            function updateStats() {
+                const options = [
+                    '丢弃', '使用', '分解', '背包', '仓库', '书架', '随从1', '随从2', '随从3'
+                ];
+
+                const stats = options.reduce((acc, option) => {
+                    acc[option] = 0;
+                    return acc;
+                }, {});
+
+                $('.items .bottom select').each(function() {
+                    const value = $(this).val();
+                    if (options.includes(value)) {
+                        stats[value]++;
+                    }
+                });
+
+                const $statsContainer = $('.stats-container');
+                $statsContainer.empty();
+
+                for (const [option, count] of Object.entries(stats)) {
+                    const $statItem = $(`<p>${option}: ${count}</p>`);
+                    $statsContainer.append($statItem);
+                }
+            }
+            // 获取所有物品的设置
+            async function collectAllItems() {
+                const $container = $('.items .bottom');
+                const itemsArray = [];
+
+                // 反向遍历容器中的每个物品('.itmes-for'
+                $container.find('.itmes-for').each((index, itemFor) => {
+                    const $itemFor = $(itemFor);
+                    const itemName = $itemFor.find('span').text();
+                    const selectedOption = $itemFor.find('select').val();
+                    // 将名称和选择的操作组合成一个数组
+                    const itemObject = {};
+                    itemObject[itemName] = selectedOption;
+                    itemsArray.push(itemObject);
+                });
+                // 发送数组
+                return itemsArray;
+            }
+            // 显示右侧页面
+            function showPage(id) {
+                const index = leftButtonArr.indexOf(id);
+                const rightBoxArrTmp = [...rightBoxArr];
+                rightBoxArrTmp.splice(index, 1);
+                rightBoxArrTmp.forEach(page => $(`.${page}`).hide());
+                $(`.${rightBoxArr[index]}`).show();
+            };
+            // 鼠标对左侧按钮的逻辑1
+            $('.left').on('mouseover','button', function() {
+                const id = $(this).attr('id');
+                $(this).css('background-color','#ccc')
+                const leftButtonArrTmp = leftButtonArr.filter(item => item !== id);
+                leftButtonArrTmp.forEach(btnName => {
+                    $(`#${btnName}`).css('background-color', '#ffffff');
+                });
+                // 显示按钮对应的右侧页面
+                showPage(id);
+                // 去掉当前页面按钮的绑定，防止鼠标移动到按钮上使已经渲染的页面信息丢失
+                if (leftButtonBindArr.includes(id)) {
+                    const leftButtonBindArrTmp = leftButtonBindArr.filter(item => item !== id)
+                    bindMouseOver(...leftButtonBindArrTmp)
+                }
+            });
+            // 鼠标移出左侧按钮
+            $('.left').on('mouseout','button', function() {
+                const id = $(this).attr('id');
+                $(this).css('background-color','#ccc')
+            });
+            // 警告弹窗
+            $('.left').on('click', '#readConfig, #addRole, #itemsConfig, #executeTask, #roleConfig', function() { 
+                const id = $(this).attr('id');
+                randerWarning(id)
+            });
+            $('.saveConfigs').on('click', function() { 
+                const id = $(this).attr('id');
+                randerWarning('saveConfigs')
+            });
+            // 登录按钮绑定
+            $('.commit').on('click', function(data) {
+                const username = $('#username').val();
+                const password = $('#password').val();
+                const server = $('#server').val();
+                $.post('/api/login', {username, password,server}, function(data) {
+                    if (data.message) {
+                        alert(data.message)
+                    } else {
+                        randerUsernamelist(data.data.roles, server, data.token);
+                    }
+                });
+
+            });
+            // 添加所有角色按钮绑定
+            $('.add_allroles').on('click', function() {
+                const interval = 100; 
+                $('.add-button').each(function(index) {
+                    setTimeout(() => {
+                        $(this).trigger('click');
+                    }, index * interval);
+                });
+            })
+            // 时间添加绑定
+            $('.addtime').on('click', function() {
+                const classname = $(this).parent().children()[2].className;
+                const data = []
+                randertimebox(data,classname);
+            });       
+            // 选择应用按钮绑定
+            $('#applyToRoles').on('click', function() {
+                const namelist = $('.roleslist .roleName .lable').map(function() {
+                    return $(this).text();
+                }).get()
+                $('.choiceRoles .top').empty();
+                namelist.forEach(name => {
+                    const html = `
+                        <div class="role-item-choice">
+                            <label>${name}</label>
+                            <input type="checkbox" name="role-checkbox" value="${name}">
+                        </div>
+                    `;
+                    $('.choiceRoles .top').append(html);
+                });
+                $('.left, .right').hide();
+                $('.choiceRoles').show();
+            });
+            // 放弃按钮的绑定
+            $('.choiceRoles #choiceNone').on('click', function(){
+                $('.left, .right').show();
+                $('.choiceRoles').hide();
+            });
+            $('.choiceRoles #choiceAll').on('click', function(){
+                const checkboxes = $('.top input[type="checkbox"]');
+                const shouldCheck = !checkboxes.is(':checked');
+                checkboxes.prop('checked', shouldCheck);
+            });
+            // 更新所选角色的配置
+            $('.choiceRoles #choiceConfirm').on('click', function(){
+                const checkedRoles = $('.top input[type="checkbox"]:checked').map(function() {
+                    return $(this).val();
+                }).get();
+                const roleSelected = {
+                    loginCommand:$('#loginCommand').val(),
+                    logoutCommand:$('#logoutCommand').val(),
+                    redboss:$('#redboss').val(),
+                    leiitai:$('#leitai').val(),
+                    dungeons:{
+                        first:$('#first').val(),
+                        second:$('#second').val(),
+                        third: $('#third').val() === 'saodang muyuan' 
+                            ? $('#third').val() 
+                            : `cr ${$('#third').val()} ${$('#third option:selected').attr('hard')}`,
+                        fourth:$('#fourth').val(),
+                    },
+                    war:{
+                        family:$('#family').val(),
+                        gang:$('#gang').val(),
+                        leader:$('#leader').val(),
+                    },
+                    week:{
+                        xiangyang:$('#xiangyang').val(),
+                        yunbiao:$('#yunbiao').val(),
+                        tazhu:$('#tazhu').val(),
+                        yaoshen:$('#yaoshen').val(),
+                    }
+                }
+                $.post('/api/choiceConfirm', {checkedRoles, roleSelected}, function(data) {
+                    if (data.message) {
+                        alert(data.message)
+                    }
+                });
+            });
+            $('.task .top .push').on('click', function(){
+                const pushTokenValue = $('.task .top :text').val();
+                $.post('/api/savePushToken', {pushTokenValue}, function(data) {
+                    if (data.message) {
+                        alert(data.message)
+                    }else {
+                        alert('保存成功')
+                    }
+               });
+            })
+            $('.task .taskup .runtask').on('click', function(){
+                $.post('/api/runall' , function(data){
+                    if (data.message) {
+                        alert(data.message)
+                    }else {
+                        alert(data.error)
+                    }
+                })
+            });
+            $('.task .taskup .stoptask').on('click', function(){
+                $.post('/api/killall' , function(data){
+                    if (data.message) {
+                        alert(data.message)
+                    }else {
+                        alert(data.error)
+                    }
+                })
+            });
+            $('.task .taskdown .rundaily').on('click', function(){
+                $.post('/api/rundaily' , function(data){
+                    if (data.message) {
+                        alert(data.message)
+                    }else {
+                       alert(data.error)
+                    }
+                })
+            });
+            $('.task .taskdown .runwar').on('click', function(){
+                $.post('/api/runwar' , function(data){
+                    if (data.message) {
+                        alert(data.message)
+                    }else {
+                        alert(data.error)
+                    }
+                })
+            });
+            $('.task .taskdown .runweek').on('click', function(){
+                $.post('/api/runweek' , function(data){
+                    if (data.message) {
+                        alert(data.message)
+                    }else {
+                        alert(data.error)
+                    }
+                })
+            });
+            // 将对象转换为 YAML 格式
+            function objectToYaml(obj) {
+                let yaml = 'Items:\n';
+                obj.forEach(item => {
+                    const itemName = Object.keys(item)[0];
+                    const selectedOption = item[itemName];
+                    yaml += ` - '${itemName}': ${selectedOption}\n`;
+                });
+                return yaml;
+            }
+        });
+    </script>
+</body>
+</html>
+s

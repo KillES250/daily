@@ -1,0 +1,242 @@
+sect:
+  - name: 武当派
+    tasker: 武当派第三代弟子 谷虚道长
+    taskerWay: jh fam 1 start;go north
+    chiefTitle: 武当派首席弟子
+    chiefWay: jh fam 1 start;go west;go northup
+  - name: 少林派
+    tasker: 少林寺第四十代弟子 清乐比丘
+    taskerWay: jh fam 2 start
+    chiefTitle: 少林派大师兄
+    chiefWay: >-
+      jh fam 2 start;go north;go north;go northeast;go northwest;go north;go
+      north
+  - name: 华山派
+    tasker: 市井豪杰 高根明
+    taskerWay: jh fam 3 start
+    chiefTitle: 华山派首席弟子
+    chiefWay: jh fam 3 start;go westup;go north
+  - name: 峨眉派
+    tasker: 峨眉派第五代弟子 苏梦清
+    taskerWay: jh fam 4 start;go west
+    chiefTitle: 峨眉大师姐
+    chiefWay: jh fam 4 start;go west;go south
+  - name: 逍遥派
+    tasker: 聪辩老人 苏星河
+    taskerWay: jh fam 5 start
+    chiefTitle: 逍遥派首席弟子
+    chiefWay: jh fam 5 start;go west
+  - name: 丐帮
+    tasker: 丐帮七袋弟子 左全
+    taskerWay: jh fam 6 start;go down
+    chiefTitle: 丐帮首席弟子
+    chiefWay: jh fam 6 start;go down;go east;go east;go east
+  - name: 杀手楼
+    tasker: 杀手教习 何小二
+    taskerWay: jh fam 7 start;go north
+    chiefTitle: 金牌杀手
+    chiefWay: jh fam 7 start;go north;go up;go up;go up;go up;go east
+  - name: 无门无派
+    tasker: 武馆教习
+    taskerWay: jh fam 0 start;go south;go south;go west
+    chiefTitle: null
+    chiefWay: null
+store:
+  - seller: 店小二
+    way: jh fam 0 start;go north;go north;go east
+    goods:
+      - <wht>米饭</wht>
+      - <wht>包子</wht>
+      - <wht>鸡腿</wht>
+      - <wht>面条</wht>
+      - <wht>扬州炒饭</wht>
+      - <wht>米酒</wht>
+      - <wht>花雕酒</wht>
+      - <wht>女儿红</wht>
+      - <hig>醉仙酿</hig>
+      - <hiy>神仙醉</hiy>
+  - seller: 杂货铺老板 杨永福
+    way: jh fam 0 start;go east;go south
+    goods:
+      - <wht>布衣</wht>
+      - <wht>钢刀</wht>
+      - <wht>木棍</wht>
+      - <wht>英雄巾</wht>
+      - <wht>布鞋</wht>
+      - <wht>铁戒指</wht>
+      - <wht>簪子</wht>
+      - <wht>长鞭</wht>
+      - <wht>钓鱼竿</wht>
+      - <wht>鱼饵</wht>
+  - seller: 药铺老板 平一指
+    way: jh fam 0 start;go east;go east;go north
+    goods:
+      - <hig>金创药</hig>
+      - <hig>引气丹</hig>
+  - seller: 铁匠铺老板 铁匠
+    way: jh fam 0 start;go east;go east;go south
+    goods:
+      - <wht>铁剑</wht>
+      - <wht>钢刀</wht>
+      - <wht>铁棍</wht>
+      - <wht>铁杖</wht>
+      - <wht>铁镐</wht>
+      - <wht>飞镖</wht>
+hunt:
+  npc: 扬州知府 程药发
+  way: jh fam 0 start;go west;go north;go north
+  pathId: yz/ymzhengting
+  path:
+    武当派: >-
+      jh fam 1 start;go north;go south;go west;go west;go east;go northup;go
+      north;go east;go west;go west;go northup;go northup;go northup;go north;go
+      north;go north;go north;go north;go north
+    少林派: >-
+      jh fam 2 start;go north;go west;go east;go east;go west;go north;go
+      northup;go southdown;go northwest;go northeast;go southeast;go
+      northwest;go north;go west;go east;go east;go west;go north;go west;go
+      east;go east;go west;go north;go west;go east;go north;go north
+    华山派: >-
+      jh fam 3 start;go eastup;go southup;jumpdown;go southup;go south;go
+      east;jh fam 3 start;go westup;go west;go east;go south;go southup;go
+      southup;break bi;go enter;go westup;go westup;jumpup;jh fam 3 start;go
+      westup;go north;go east;go west;go north;go east;go west;go north
+    峨眉派: >-
+      jh fam 4 start;go northup;go east;jh fam 4 start;go west;go south;go
+      east;go east;go west;go south;go north;go west;go south;go north;go
+      west;go west;go east;go north;go north;go south;go south;go south;go south
+    逍遥派: >-
+      jh fam 5 start;go north;go north;jh fam 5 start;go west;go south;jh fam 5
+      start;go south;go south;jh fam 5 start;go east;go north;go south;go
+      south;go south;jh fam 5 start;go down;go down
+    丐帮: >-
+      jh fam 6 start;go down;go east;go east;go east;go up;go down;go east;go
+      east;go up
+tower:
+  npc: 守门人
+  way: jh fam 9 start
+  guardianTitle: 武道塔守护者
+temple:
+  way: jh fam 0 start;go north;go north;go west
+  pathId: yz/wumiao
+bank:
+  way: jh fam 0 start;go north;go west
+  pathId: yz/qianzhuang
+useLessItems:
+  - <hig>短衣劲装</hig>
+  - <hic>崔莺莺的手镯</hic>
+  - <hig>崔员外的戒指</hig>
+  - <hig>流氓巾</hig>
+  - <hig>流氓衣</hig>
+  - <hig>流氓鞋</hig>
+  - <hig>流氓护腕</hig>
+  - <hig>流氓短剑</hig>
+  - <hig>流氓闷棍</hig>
+  - <hig>官服</hig>
+  - <hig>韦春芳的项链</hig>
+  - <hic>将军剑</hic>
+  - <hig>军刀</hig>
+  - <hig>拂尘</hig>
+  - <hig>军服</hig>
+  - <hig>齐眉棍</hig>
+  - <hic>金丝宝甲</hic>
+  - <hic>鳌拜匕首</hic>
+  - <hic>疤面面具</hic>
+  - <hic>云龙剑</hic>
+  - <hic>神龙袍</hic>
+  - <hic>神龙冠</hic>
+  - <hic>神龙靴</hic>
+  - <hic>神龙护腕</hic>
+  - <hic>神龙腰带</hic>
+  - <hic>神龙杖</hic>
+  - <hic>神龙令</hic>
+  - <hiy>闯王宝刀</hiy>
+  - <hiy>钓鱼竿</hiy>
+  - <hig>金蛇锥</hig>
+  - <hic>金蛇戒</hic>
+  - <hic>金蛇披风</hic>
+  - <hic>温仪的香囊</hic>
+  - <hiy>八卦棍</hiy>
+  - <hiy>金蛇剑</hiy>
+  - <hiy>狂风刀</hiy>
+  - <hiy>田伯光的面罩</hiy>
+  - <hic>琴中剑</hic>
+  - <hiy>曲洋的琴环</hiy>
+  - <hiy>刘正风的茧绸袍</hiy>
+  - <hiy>泰山登山靴</hiy>
+  - <hiy>磐石护符</hiy>
+  - <hiy>五岳令旗</hiy>
+  - <hiy>盟主披风</hiy>
+  - <hiy>火龙刀</hiy>
+  - <hiy>火龙剑</hiy>
+  - <hiy>火龙拳</hiy>
+  - <hiy>火龙鞭</hiy>
+  - <hiy>火龙棍</hiy>
+  - <HIZ>玉箫</HIZ>
+  - <HIZ>软猬甲</HIZ>
+  - <HIZ>灵蛇杖</HIZ>
+  - <hiy>碧磷针</hiy>
+  - <HIZ>神木王鼎</HIZ>
+  - <HIZ>离火珠</HIZ>
+  - <hiy>涟星的冰玉簪</hiy>
+  - <hiy>邀月的手镯</hiy>
+  - <hiy>花无缺的玉佩</hiy>
+  - <HIZ>移花宫装</HIZ>
+  - <HIZ>移花宫履</HIZ>
+  - <HIZ>阿朱的易容面具</HIZ>
+  - <hiy>上官云的披风</hiy>
+  - <hiy>童百熊的戒指</hiy>
+  - <hiy>杨莲亭的项圈</hiy>
+  - <hiy>贾布的护腰锁</hiy>
+  - <HIZ>东方不败的绣花针</HIZ>
+  - <HIZ>圣火令</HIZ>
+  - <HIZ>周芷若的手镯</HIZ>
+  - <HIZ>杨不悔的项链</HIZ>
+  - <HIZ>赵敏的戒指</HIZ>
+  - <HIZ>韦一笑的逃命鞋</HIZ>
+  - <HIZ>冰魄银针</HIZ>
+  - <HIZ>金铃索</HIZ>
+  - <HIZ>玉竹杖</HIZ>
+
+week:
+  way:
+    xiangyang: jh fam 8 start
+    yunbiao: jh fam 0 start;go west;go west;go south;go south
+    tazhu: jh fam 9 start;go enter
+    yaoshen: psxk
+    
+war:
+  way: jh fam 3 start;go westup;go north;go north
+  
+dungeonWay:
+  start: jh fam 9 start;go enter;go up
+  jinDi: go south
+  guZongMen: go north;go north;go north;go north;go north;go north;tiao1 shi;tiao1 shi;tiao2 shi;jumpdown
+  yaoTa: go north;go north;go north;go north;go north;go north;tiao1 shi;tiao3 shi;tiao1 shi;tiao3 shi;tiao2 shi;go north
+
+fbWay:
+  树林: cr yz/lw/shangu 0 0;go west;go west;go west
+  财主家: cr yz/cuifu/caizhu 1 0;go north;go north;go west;go east;go east
+  流氓巷: cr yz/lmw/xiangzi1 0 0;go east;go north;go south;go east;go east
+  丽春院: cr yz/lcy/dating 0 0;go up;go east;go west;go west;go enter
+  神龙教: cr bj/shenlong/haitan 0 0;go north;go north;go north;go north;go south;go east;go east;go north;go north;go north
+  温府: cr cd/wen/damen 0 0;go north;go northeast;go east;go west;go north;go east;go west;go northwest;go southwest;go west;go east;go south;go west;go east;go north;go northeast;go north;go north
+  五毒教: cr cd/wudu/damen 0 0;go east;go south;go west;go east;go east;go west;go south;go north;go north;go east;go east;go east;go north;go west
+  恒山: cr wuyue/hengshan/daziling 0 0;go northup;go northwest;go northup;go southdown;go northwest;go northup;go northup;go north;go north;go south;go west;go north;go south;go east;go east;go north
+  青城山: cr wuyue/qingcheng/shanlu 0 0;go westup;go north;go northup;go eastup;go northup;go north;go north;go north;go north;go south;go east;go north
+  衡山: cr wuyue/henshan/hengyang 0 0;go west;go west;go west;go east;go east;go north;go north;go north;go west;go east;go east;go west;go south;go south;go south;go east;go east;go southeast;go south;go east;go south;go south
+  泰山: cr wuyue/taishan/daizong 0 0;go northup;go northup;go northup;go northup;go northup;go northup;go northup;go northup;go northup
+  嵩山: cr wuyue/songshan/taishi 0 0;go north;go north;go northup;go northeast;go northup;go northup;go westup;go westup;go eastdown;go eastdown;go northup;go north;go north;go north;go north;go south;go west;go east;go east
+  云梦沼泽: cr cd/yunmeng/senlin 0 0;go east;go north;go east;go north;go west;go south;go west;go north;go north;go north;go north;go north
+  白驼山: cr baituo/damen 0 0;go north;go north;go north;go north;go south;go south;go south;go west;go south;go north;go west;go west;go north;go north;go north
+  星宿海: cr xingxiu/xxh6 0 0;go northeast;go north;go northwest;go southwest;go south;go north;go northeast;go north
+  冰火岛: cr mj/bhd/haibian 1 0;go west;go west;go west;go west;go east;go east;go east;go east;go north;go north;go north;go west;go out;go east;go north
+  移花宫: cr huashan/yihua/shandao 1 0;go south;go south;go south;go south;go southeast;go northwest;go southwest;go southeast;go down;go west;go west;go west;go north;go north
+  燕子坞: cr murong/anbian 1 0;go east;go east;go east;go east;go east;go east;go west;go north;go north;go south;go east;go west;go south;go west;go west;go south;go east;go south;go south;go east
+  黑木崖: cr heimuya/shangu 0 0;go north;go north;go north;go south;go south;go south;go south;go south;go south;go north;go north;go north;go east;go north;go north;go north;go south;go south;go south;go south;go north;go east;go enter;go up;go enter;go up;go enter;go up;go east;go east;go down;go south;go east
+  缥缈峰: cr lingjiu/shanjiao 1 0;go northup;go northup;go northup;go northup;go north;go north;go north;go west;go east;go east;go west;go north;go west;go east;go east;go west;go north;go north
+  光明顶: cr mj/shanmen 0 0;go north;go west;go northwest;go north;go east;go east;go east;go west;go west;go west;go north;go north;go north;go east;go east;go west;go north;go east;go east;go west;go west;go south;go east;go north;go north;go north;go west;go north;go north;go south;go west
+  天龙寺: cr tianlong/damen 1 0;go south;go south;go south;go north;go southwest;go south;go east;go south;go north;go east;go north
+  血刀门: cr xuedao/shankou 0 0;go south;go east;go west;go south;go eastup;go enter
+  古墓派: cr gumu/gumukou 1 0;go enter;go east;go north;go south;go east
+  华山论剑: cr huashan/lunjian/leitaixia 0 0;go up;go north;go south;go down;go south;go north;go west;go east;go east
