@@ -41,6 +41,7 @@ module.exports = async function (data) {
                     }
                     // 更新当前指令集合的内容，用于后面执行
                     this.currentcmd = [item.id, item.count];
+                    console.log(to)
                     const to = actway(this.roomPath);
                     this.cmd.send(`${to}`)
                     currentItem.data.shift();
@@ -109,10 +110,9 @@ module.exports = async function (data) {
             break;
         case 'dialog':
             // 写个数据示例方便以后检查：{type:"dialog",dialog:"pack",id:"w5onddc428a",remove:1,money:908390195}
-            if (data.dialog === 'pack' && data.remove) {
+            if (data.dialog === 'pack' && data.remove && data.money !== 0) {
                 const to = actway(this.roomPath);
                 this.cmd.send(`${to}`)
-
             }
             break;
         case 'room':

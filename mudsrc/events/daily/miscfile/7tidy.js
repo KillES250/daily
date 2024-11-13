@@ -87,12 +87,13 @@ module.exports = async function (data) {
                 return [null,null];         // 返回一个包含两个为空元素的数组
             };
         } else { //浅整理判定
-            const bagItem = this.userBag.data[tidyBody[0].indexNum] //拿到数据
+            const bagItem = tidyBody[0].name.data[tidyBody[0].indexNum] //拿到数据
             tidyBody[0].findNumOfTimes -= 1;  // 对应的tidyBody[0](this.userBag)的查找次数findNumOfTimes-1
-            const store = this.userStore.data.find(storeItem  => storeItem .name === bagItem.name) //比对名字
+            const store = tidyBody[1].name.data.find(storeItem  => storeItem.name === bagItem.name) //比对名字
+            console.log('当前查找位置：',tidyBody[0].indexNum,'   当前待比对物品：',bagItem.name)
             if (store) {  //如果存在，则将物品存入仓库
                 this.cmdoftidy = [`store ${bagItem.count} ${bagItem.id}`, null]
-                tidyBody[0].indexNum -= 1; //查找位置减1，自动对齐下一项
+                tidyBody[0].indexNum += 1; //查找位置加1 返回空指令执行以跳过改条
                 this.cmd.send('tm 指令已返回');
                 return this.cmdoftidy;
             } else {

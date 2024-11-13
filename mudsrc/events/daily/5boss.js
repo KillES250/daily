@@ -280,10 +280,8 @@ module.exports = async function (data) {
             if(this.userConfig.redboss === false && !data.kill){
                 // 等待技能冷却
                 await sleep(60);
-                // 清空技能黑名单
-                this.skillsBanList = [];
                 // 将血海加入黑名单
-                this.skillsBanList = this.userSkills.filter(skill => !this.skillsForRedBoss.includes(skill));
+                this.skillsBanList = this.skillsForRedBoss
                 // 剑心+探龙
                 this.cmd.send('enable force none;enable force cihangjiandian')
                 this.cmd.send(`perform force.xin;perform ${this.tanlong}`)
@@ -310,7 +308,7 @@ module.exports = async function (data) {
                     return;
                 } 
                 if(data.content === '调用击杀2'){
-                    this.emit('Data', { type: 'readyForKill' , id:this.bossId , npc:'kill'});
+                    this.emit('Data', { type: 'readyForKill' , id:this.bossId , kill:'npc'});
                     return;
                 } 
                 if (data.content === '调用结束') {
