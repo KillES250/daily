@@ -41,7 +41,6 @@ module.exports = async function (data) {
                     }
                     // 更新当前指令集合的内容，用于后面执行
                     this.currentcmd = [item.id, item.count];
-                    console.log(to)
                     const to = actway(this.roomPath);
                     this.cmd.send(`${to}`)
                     currentItem.data.shift();
