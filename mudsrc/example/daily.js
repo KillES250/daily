@@ -57,6 +57,7 @@ module.exports = class Daily extends Socket {
         this.fbnum = 0;
         this.tiejiang = null;
         this.weapon = null;
+        this.jlxhoverflow = null;
         //boss相关
         this.skillsForRedBoss = ['blade.xue'];
         this.bossId = null;
@@ -72,6 +73,7 @@ module.exports = class Daily extends Socket {
         this.executed = true;
         // this.mapdata = {};
         //杂项相关
+        this.dabieye = true;
         this.misclist = this.getmisclist();
         this.mischouqin = null;
         this.mischouqinbuy = false;

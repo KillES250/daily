@@ -44,6 +44,9 @@ module.exports = async function (data) {
                 return;
             }
             if (this.roomPath === "home/woshi" || this.roomPath === "home/danjian" || this.roomPath === "yz/qianzhuang") {
+                if( this.roomPath === "home/danjian") {
+                    this.dabieye = false;
+                }
                 if( this.userSj.id ){
                     this.cmd.send(`sj ${this.userSj.id}`)
                 } else {
@@ -142,6 +145,7 @@ module.exports = async function (data) {
                 return;
             }
             if (data.data.includes('管家拦住你')) {
+                this.dabieye = false;
                 // 穷光蛋去钱庄…………
                 this.cmd.send('jh fam 0 start;go north;go west');
                 return;

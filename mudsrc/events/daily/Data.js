@@ -6,7 +6,7 @@ module.exports = async function (data) {
     switch (data.type) {
         case 'login':
             logger.success(`「${this.userConfig.name}」登录成功`);
-            this.cmd.send('setting auto_pfm 0;setting auto_pfm2 0;setting auto_work 0;setting auto_get 1');
+            this.cmd.send('setting auto_pfm 0;setting auto_pfm2 0;setting auto_work 0;setting auto_get 1;setting no_message 1');
             await sleep(1);
             this.cmd.send('cr over')
             this.cmd.send('score');
