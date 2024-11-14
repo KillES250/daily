@@ -20,17 +20,8 @@ module.exports = async function (data) {
             else if (!this.userConfig.dungeons.first && !this.userConfig.dungeons.second && this.userConfig.dungeons.third.includes('cr')){
                 this.fbnum = this.userJl / 10
                 this.cmd.send(`jh fam 0 start;go south;go east;sell all`);
-                if(this.userConfig.dungeons.fourth){
-                    while (this.fbnum > 0) {
-                        this.cmd.send(`${this.userConfig.dungeons.third} 0`)
-                        await sleep(3);
-                        this.cmd.send('cr over');
-                        await sleep(3);
-                        this.fbnum -= 1
-                        if (this.fbnum === 0) {
-                            this.emit('Data',{type:'next'});
-                        }
-                    }
+                if(this.userConfig.dungeons.fourth && this.fbnum > 0 ){
+                    this.cmd.send(`${this.userConfig.dungeons.third} 0`)
                 } else{
                     this.cmd.send(`shop 0 ${this.fbnum};${this.userConfig.dungeons.third} ${this.fbnum}`)
                 }
@@ -46,26 +37,32 @@ module.exports = async function (data) {
                 }else if(this.dungeonsList.yaota){
                     this.cmd.send(this.dungeonsList.yaota);
                 }
-            }else if(this.room === '古大陆-破碎通道'){
+                return;
+            }
+            if(this.room === '古大陆-破碎通道'){
                 this.cmd.send(`shop 0 2;cr yzjd/pingyuan 0 2`);
                 this.userJl = this.userJl - 200
                 this.dungeonsList.jindi = null;
-                await sleep(5);
-                this.cmd.send(this.gameInfo.dungeonWay.start);
-            }else if (this.roomPath === 'zc/shanjiao'){
+                return;
+            }
+            if (this.roomPath === 'zc/shanjiao'){
                 this.cmd.send(`shop 0 5;cr gmp/shanmen 0 5`);
                 this.userJl = this.userJl - 50
                 this.dungeonsList.guzongmen = null;
-                await sleep(10);
-                this.cmd.send(this.gameInfo.dungeonWay.start);
-            }else if(this.room === '古大陆-墓园'){
+                return;
+            }
+            if(this.room === '古大陆-墓园'){
                 this.cmd.send('go north')
                 if(this.userJl > 0){
                     this.cmd.send(`shop 0 1;saodang muyuan`);
                 } else {
                     this.dungeonsList.yaota = null;
-                    this.emit('Data',{type:'next'});
+                    this.cmd.send('tm 结束副本流程')
                 }
+                return;
+            } 
+            if (this.room.includes('副本区域')){
+                this.cmd.send('cr over')
             }
             break;
         case 'items':
@@ -80,17 +77,8 @@ module.exports = async function (data) {
                         }else{
                             this.fbnum = this.userJl / 10
                             this.cmd.send('jh fam 0 start;go south;go east;sell all')
-                            if(this.userConfig.dungeons.fourth === true){
-                                while (this.fbnum > 0) {
-                                    this.cmd.send(`${this.userConfig.dungeons.third} 0`);
-                                    await sleep(2);
-                                    this.cmd.send('cr over');
-                                    await sleep(2);
-                                    this.fbnum -= 1
-                                }
-                                if (this.fbnum === 0) {
-                                    this.emit('Data',{type:'next'});
-                                }
+                            if(this.userConfig.dungeons.fourth === true && this.fbnum > 0){
+                                this.cmd.send(`${this.userConfig.dungeons.third} 0`)
                             } else{
                                 this.cmd.send(`shop 0 ${this.fbnum};${this.userConfig.dungeons.third} ${this.fbnum}`)
                             }
@@ -122,26 +110,41 @@ module.exports = async function (data) {
                     this.cmd.send(`shop 0 1;saodang muyuan`);
                 }else if (this.userJl <= 0) {
                     this.dungeonsList.yaota = null;
-                    this.emit('Data',{type:'next'}); 
+                    this.cmd.send('tm 结束副本流程') 
                 }
+                return;
             }
-            else if (/打败我|你要进入哪个副本|没有那么多的元宝|精力不够|你尚未通关弑妖塔，不能快速完成/.test(data.data)) {
+            if (/打败我|你要进入哪个副本|没有那么多的元宝|精力不够|你尚未通关弑妖塔，不能快速完成/.test(data.data)) {
                 console.log(data.data);
-                this.emit('Data',{type:'next'}); 
+                this.cmd.send('tm 结束副本流程');
+                return;
             }
-            else if (data.data.includes('扫荡完成') && this.roomPath !== 'zc/shanjiao' && this.room !== '古大陆-破碎通道') {
-                this.cmd.send(`jh fam 0 start;go south;go east;sell all`);
-                await sleep(5);
+            if (data.data.includes('扫荡完成')){
+                if(this.roomPath !== 'zc/shanjiao' && this.room !== '古大陆-破碎通道'){
+                    this.cmd.send(this.gameInfo.dungeonWay.start);
+                } else {
+                    this.cmd.send(`jh fam 0 start;go south;go east;sell all`);
+                    this.cmd.send('tm 结束副本流程')
+                }
+                return;
+            }
+            
+            if(data.data.includes('完成度未满100%，未能解锁下个副本。')){
+                this.fbnum -=1;
+                if(this.fbnum > 0){
+                    this.cmd.send(`${this.userConfig.dungeons.third} 0`)
+                } else {
+                    this.cmd.send('tm 结束副本流程')
+                }
+                return;
+            }
+            break;
+        case 'msg':
+            if (data.ch === 'tm' && data.content === '结束副本流程') {
                 this.emit('Data',{type:'next'});
             }
-            break; 
+            break;
         default:
             break;
     }
-}
-
-async function sleep(seconds) {
-    return new Promise(resolve => {
-        setTimeout(resolve, seconds * 1000);
-    });
 }
