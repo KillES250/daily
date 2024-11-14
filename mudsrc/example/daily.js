@@ -60,6 +60,7 @@ module.exports = class Daily extends Socket {
         this.jlxhoverflow = null;
         //boss相关
         this.skillsForRedBoss = ['blade.xue'];
+        this.killCommands = null;
         this.bossId = null;
         this.bossName = null;
         this.tanlong = null;

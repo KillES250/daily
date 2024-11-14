@@ -62,7 +62,6 @@ module.exports = async function (data){
                 if(data.name.includes('随从礼包') || data.name.includes('扫荡符')){
                     this.cmd.send('score')
                 }
-                this.cmd.send('score')
             }
             if(data.dialog === 'score'){
                 const jingReg = data.jingli.match(/(\d+)\/(\d+)<hig>\(\+\d+\)<\/hig>/);

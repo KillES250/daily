@@ -289,10 +289,11 @@ module.exports = async function (data) {
             // 2、需击杀npc
             else if (this.userConfig.redboss === false && data.kill) {
                 this.cmd.send('enable force changshengjue;perform force.zhen;enable force cihangjiandian');
+                this.killCommands = '';
                 this.npclist.forEach(item => {
-                    killCommands += `kill ${item.id};`;
+                    this.killCommands += `kill ${item.id};`;
                 });
-                this.cmd.send(killCommands,false);
+                this.cmd.send(this.killCommands,false);
                 // 等待战斗结束自动跳转至上方击杀boss调用处
             }
             // 直接击杀
@@ -375,11 +376,11 @@ module.exports = async function (data) {
                 // 不允许主动删除路径
                 this.delpath = false;
                 this.itemsResult = true;
-                let killCommands = '';
+                this.killCommands = '';
                 this.npclist.forEach(item => {
-                    killCommands += `kill ${item.id};`;
+                    this.killCommands += `kill ${item.id};`;
                 });
-                this.cmd.send(killCommands,false);
+                this.cmd.send(this.killCommands,false);
                 // 这里直接跳出,等待combat的end返回
                 break;
             }
