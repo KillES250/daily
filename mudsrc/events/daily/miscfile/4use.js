@@ -106,6 +106,14 @@ module.exports = async function (data) {
                 }
             }
             break;
+        case 'tip':
+            if(/你家里的书架已经够大了。/.test(data.data)){ 
+                this.currentcmd[1] -= 1;
+                if(this.currentcmd[1] === 0){
+                    await organizeItems(this.copyArr);
+                }
+            }
+            break;
         case 'msg':
             if(data.ch === 'tm'){
                 if(data.content === '结束使用物品流程'){
