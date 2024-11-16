@@ -29,10 +29,6 @@ module.exports = function (data) {
                 this.emit('Data',{type:'next'});
             }
             break;
-        case 'room':
-            this.room = data.name
-            this.roomPath = data.path
-            break;
         default:
             break;
     }

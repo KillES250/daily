@@ -58,7 +58,8 @@ module.exports = async function (data){
             }
             break;
         case 'dialog':
-            if (data.dialog === 'pack') {
+            if (data.dialog === 'pack' && data.name) {
+                console.log(data);
                 if(data.name.includes('随从礼包') || data.name.includes('扫荡符')){
                     this.cmd.send('score')
                 }

@@ -27,8 +27,6 @@ module.exports = async function (data) {
                 }
             }
         case 'room':
-            this.room = data.name;
-            this.roomPath = data.path
             if(this.room=== '古大陆-平原'){
                 if(this.dungeonsList.jindi){
                     this.cmd.send(this.dungeonsList.jindi);

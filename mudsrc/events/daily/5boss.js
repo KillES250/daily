@@ -32,8 +32,6 @@ module.exports = async function (data) {
             break;
             
         case 'room':
-            this.room = data.name;
-            this.roomPath = data.path;
             fs.appendFileSync(logFilePath,`${this.room}\n`);
             // 这里会跳转到item中拿到为推床次数做赋值
             if(this.room === '移花宫-邀月宫(副本区域)' || this.room === '移花宫-涟星宫(副本区域)'){

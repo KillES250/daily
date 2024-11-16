@@ -45,6 +45,9 @@ module.exports = async function (data) {
                 this.userLevel = data.level;
                 this.userId = data.id;
             }
+            if (data.dialog === 'pack' && data.id && data.uneq === 0 && this.isCombat){
+                this.cmd.send(`eq ${data.id}`);
+            }
             break;
         case 'next':
             if (this.taskList.length > 0) {
@@ -64,6 +67,8 @@ module.exports = async function (data) {
             console.log(data.data);
             break;
         case 'room':
+            this.room = data.name;
+            this.roomPath = data.path;
             console.log(data.name);
             break;
         default:
