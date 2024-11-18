@@ -118,7 +118,7 @@ module.exports = async function (data) {
                 return;
             }
             if (data.data.includes('扫荡完成')){
-                if(this.roomPath !== 'zc/shanjiao' && this.room !== '古大陆-破碎通道'){
+                if(this.roomPath === 'zc/shanjiao' || this.room === '古大陆-破碎通道'){
                     this.cmd.send(this.gameInfo.dungeonWay.start);
                 } else {
                     this.cmd.send(`jh fam 0 start;go south;go east;sell all`);
