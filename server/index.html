@@ -356,7 +356,10 @@
     /* .rolseConfigs #optionsForm .option-group-for2 input[type="text"]{
         display: flex;
     } */
-    
+    .clickable-title{
+        color: #ac7ab5;
+        cursor: default;
+    }
     
     .choiceRoles {
         display: none;
@@ -749,7 +752,9 @@
         </div>
         <div class="modal-warning">
             <div class="modal-content">
-                <span class="modal-title">重要提示</span>
+                <a href="http://localhost:3000/tuiyan" class="clickable-title">
+                    <span class="modal-title">重要提示</span>
+                </a>
                 <span class="modal-msg" value="none">信息</span>
             </div>
             <div class="modal-button">
@@ -891,20 +896,25 @@
                 $('#rolenName').text(data.name);
                 $('#loginCommand').text(data.loginCommand);
                 $('#logoutCommand').text(data.logoutCommand);
-                $('#redboss').val(data.redboss ? `${data.redboss}` : "null");
+                const redbossValue = data.redboss === null ? "null" : (data.redboss === false ? "false" : `${data.redboss}`);
+                $('#redboss').val(redbossValue);
                 $('#leitai').val(`${data.leitai}`);
                 $('#first').val(`${data.dungeons.first}`);
                 $('#second').val(`${data.dungeons.second}`);
-                const third = data.dungeons.third.replace(/^(cr )|(\s*\d+\s*)$/g, '');
+                // const third = data.dungeons.third.replace(/^(cr )|(\s*\d+\s*)$/g, '');
+                const third = data.dungeons.third.match(/cr (\S+) (\d+)/);
+                $(`#third option[value="${third[1]}"][hard="${third[2]}"]`).prop('selected', true);
+                // $('#third').val(third);
                 $('#fourth').val(`${data.dungeons.fourth}`);
-                $('#third').val(third);
                 $('#famiily').val(`${data.war.famiily}`);
                 $('#gang').val(`${data.war.gang}`);
                 $('#leader').val(`${data.war.leader}`);
                 $('#xiangyang').val(`${data.week.xiangyang}`);
                 $('#yunbiao').val(`${data.week.yunbiao}`);
-                $('#tazhu').val(data.week.tazhu ? `${data.week.tazhu}` : "null");
-                $('#yaoshen').val(data.week.yaoshen ? `${data.week.yaoshen}` : "null");
+                const tazhuValue = data.week.tazhu === null ? "null" : (data.week.tazhu === false ? "false" : `${data.week.tazhu}`);
+                $('#tazhu').val(tazhuValue);
+                const yaoshenValue = data.week.yaoshen === null ? "null" : (data.week.yaoshen === false ? "false" : `${data.week.yaoshen}`);
+                $('#yaoshen').val(yaoshenValue);
             };
             // 渲染分区列表
             function randerServerSelect(servers) {
