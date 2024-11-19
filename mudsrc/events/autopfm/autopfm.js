@@ -42,7 +42,7 @@ module.exports = async function (data){
             break;
         case 'dispfm':
             // 左右剑罡or剑来
-            if(data.id === 'sword.lai' || data.id === 'sword.ji'){
+            if((data.id === 'sword.lai' || data.id === 'sword.ji') && this.kongmingquan){
                 this.cmd.send('perform unarmed.zuo');
             }
             // 当塔主跟boss以及帮战开始时，如果出招返回有这些buff，则直接跳出并指向————>case 'status':add位置
