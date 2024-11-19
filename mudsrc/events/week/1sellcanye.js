@@ -32,7 +32,6 @@ module.exports = async function (data){
             if(data.dialog === 'pack' && data.items){
                 for(let i = 0;i < data.items.length ;i++){
                     const items = data.items[i]
-                    console.log(items)
                     if (items.name.includes('残页') && !jinjie.some(item => items.name.includes(item))){
                         // sell 1 f588e3354ea to 5e2ae3152ca
                         this.cmd.send(`sell ${items.count} ${items.id} to ${this.shuyuanId}`)

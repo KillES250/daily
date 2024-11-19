@@ -12,6 +12,9 @@ module.exports = async function (data){
             );
             break;
         case 'tip':
+            if (data.data.includes('说：')) {
+                return;
+            }
             if (/你挥着铁镐开始认真挖矿|你盘膝坐下开始闭关修炼|你开始在在药店当学徒....../.test(data.data)) {
                 clearTimeout(this.timers.fix);
                 clearInterval(this.timers.pfm);

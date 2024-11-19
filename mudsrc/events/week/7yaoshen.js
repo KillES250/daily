@@ -35,11 +35,11 @@ module.exports = async function (data){
                 return;
             }
             if(this.room === '古大陆-墓园'){
-                if(this.canSeamless === false && !this.xuanlingdan.id && this.xuanlingdan.num <= 1){ //这是吃药无缝失败后药没了的判定
+                if(this.xuanwuOK){
                     this.cmd.send('tm 结束妖神流程1')
                     return;
                 }
-                if(this.xuanwuOK){
+                if(this.canSeamless === false && !this.xuanlingdan.id && this.xuanlingdan.num <= 1){ //这是吃药无缝失败后药没了的判定
                     this.cmd.send('tm 结束妖神流程1')
                     return;
                 }
@@ -97,6 +97,7 @@ module.exports = async function (data){
                     return;
                 }
                 if (!this.yaoshenOK){//如果妖神不是被击败的，放弃奖励离开副本
+                    this.yaoshenTestNum += 1
                     this.cmd.send('lkfb gu');
                     return;
                 }

@@ -9,6 +9,9 @@ module.exports = async function (data){
             this.cmd.send('transmoney');
             break;
         case 'tip':
+            if (data.data.includes('说：')) {
+                return;
+            }
             if (data.data.includes('每日签到')) {
                 const cashArr = data.data.match(/\d+/g)
                 const cashPer = cashArr[2]/cashArr[3]

@@ -64,6 +64,9 @@ module.exports = async function (data) {
             }
             break;
         case 'tip':
+            if (data.data.includes('说：')) {
+                return;
+            }
             console.log(data.data);
             break;
         case 'room':

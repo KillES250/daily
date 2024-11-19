@@ -40,6 +40,7 @@ module.exports = class War extends Socket {
         if(this.userConfig.war.leader === true){
             this.hpPerjk();
         }
+        this.tiejiang = null;
     }
     loadEvents() {
         const [onClose] = this.listeners('CLOSE');
