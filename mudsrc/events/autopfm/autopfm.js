@@ -86,16 +86,16 @@ module.exports = async function (data){
                 'force.busi': 0,
                 'force.xin': 0,
                 'force.cui': 0,
-                'dodge.chan': 1,
                 'blade.shi': 1,
                 'sword.wu': 1,
                 'sword.yi': 1,
+                'blade.ref': 1,
+                'force.ling': 1,
                 'dodge.gui': 1,
                 'force.zhen': 2,
                 'dodge.fo': 2,
                 'dodge.power': 2,
                 'dodge.lingbo': 2,
-                'force.ling': 2,
                 'force.power': 2,
                 'force.wang': 3,
                 'sword.yu': 4,
@@ -107,7 +107,6 @@ module.exports = async function (data){
                 'sword.chan': 5,
                 'force.tu': 6,
                 'blade.xue': 6,
-                'blade.ref': 6,
                 'throwing.luo': 6,
                 'sword.ji': 6,
             };
@@ -135,7 +134,12 @@ module.exports = async function (data){
                 }
             }
             else if(data.action === 'remove') { 
-                this.userStatus.delete(data.sid);
+                if (Array.isArray(data.sid)) {
+                    data.sid = data.sid.filter(item => item !== 0);
+                    data.sid.forEach(sid => this.userStatus.delete(sid));
+                } else {
+                    this.userStatus.delete(data.sid);
+                }
             }
             else if(data.action === 'clear') {
                  this.userStatus = new Set();
