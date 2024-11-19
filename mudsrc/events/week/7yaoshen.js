@@ -71,7 +71,7 @@ module.exports = async function (data){
                 this.yaoshenTestNum += 1;
             }
             if(/不能开启弑妖塔。|不能挑战妖神。|你本周已经挑战过妖神/.test(data.data)){
-                this.cmd.send('tm 结束妖神流程')
+                this.cmd.send('tm 结束妖神流程1')
                 return;
             }
             if( data.data.includes('崩解为碎片。')){
