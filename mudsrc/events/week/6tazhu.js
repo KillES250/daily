@@ -34,7 +34,7 @@ module.exports = async function (data){
                 return;
             }
             if(data.data.includes('你目前可以直接去挑战第')){
-                const num = data.data.match(/\d+/g)[0];
+                const num = parseInt(data.data.match(/\d+/g)[0],10);
                 if(num === 100){
                     this.cmd.send('go enter');
                 } else {

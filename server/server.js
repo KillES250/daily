@@ -17,6 +17,9 @@ app.use(express.urlencoded({ extended: true, depth: 10, limit: '50mb' }));
 app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, 'index.html'));
 });
+app.get('/tuiyan', (req, res) => {
+    res.sendFile(path.join(__dirname,  '../tuiyan/index.html'));
+});
 app.post('/api/:action', async (req, res) => {
     const action = req.params.action;
     switch (action) {

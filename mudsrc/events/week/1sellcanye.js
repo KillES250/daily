@@ -4,27 +4,26 @@ module.exports = async function (data){
             if (this.qucmd.length > 0 ){
                 this.cmd.send(this.homeWay);
             } else {
-                this.cmd.send('tm 结束售卖流程')
+                this.cmd.send('pack');
             }
             break;
         case 'room':
             if (this.roomPath === "home/woshi" || this.roomPath === "home/danjian" || this.roomPath === "yz/qianzhuang"){
                 if(this.qucmd.length > 0 && this.userBag.count > 0 ){
-                    while (this.userBag.count > 0) {
-                        if (this.qucmd.length > 0) {
-                            this.cmd.send(this.qucmd[0]);
-                            this.qucmd.shift();
-                            this.userBag.count -=1;
+                    while (this.userBag.count > 0 && this.qucmd.length > 0) {
+                        this.cmd.send(this.qucmd[0]);
+                        this.qucmd.shift();
+                        this.userBag.count -=1;
+                        if(this.userBag.count <= 0 || this.qucmd.length === 0 ){
+                            this.cmd.send('jh fam 0 start;go east;go north');
+                            break;
                         }
                     }
-                    this.cmd.send('jh fam 0 start;go east;go north')
-                    return;
-                } else if (this.userBag.count <= 0 || this.qucmd.length === 0 ){
+                }else if (this.userBag.count <= 0 || this.qucmd.length === 0 ){
                     // 背包满了或者没有需要售卖的物品了，无法取出残页售卖，结束售卖流程
                     this.cmd.send('tm 结束售卖流程');
                 } 
-                return;
-            }
+            } 
             if (this.roomPath === "yz/shuyuan"){
                 this.cmd.send('pack');
             }
@@ -33,6 +32,7 @@ module.exports = async function (data){
             if(data.dialog === 'pack' && data.items){
                 for(let i = 0;i < data.items.length ;i++){
                     const items = data.items[i]
+                    console.log(items)
                     if (items.name.includes('残页') && !jinjie.some(item => items.name.includes(item))){
                         // sell 1 f588e3354ea to 5e2ae3152ca
                         this.cmd.send(`sell ${items.count} ${items.id} to ${this.shuyuanId}`)

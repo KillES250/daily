@@ -21,7 +21,7 @@ module.exports = async function (data){
             // 林震南说道：现在有20个委托，你需要支付2000黄金的雇佣费用。
             if(data.data.includes('你需要支付')){
                 const packNumForYunbiao = data.data.match(/\d+/g)[0]
-                this.packNumForYunbiao = packNumForYunbiao * 2
+                this.packNumForYunbiao = packNumForYunbiao * 3
                 this.cmd.send(`task yunbiao ${this.biaojuId} qkstart`)
                 return;
             }
