@@ -183,6 +183,12 @@ module.exports = async function (data) {
                     get seachPriority() { return that.userSc3.count - that.userSc3.data.length; }
                 }
             ];
+            //用于跳过，所有背包空间之和小于等于0的话，无法进行整理，跳过流程
+            const totalSearchPriority = this.tidyBody.reduce((sum, item) => sum + (item?.seachPriority || 0), 0);
+            if (totalSearchPriority <= 0) {
+                this.cmd.send('tm 结束归类');
+                return;
+            }
             this.cmd.send('tm 开始整理');
             break;
         case 'msg':
