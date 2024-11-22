@@ -3,6 +3,7 @@ const logger = require(path.resolve(__dirname, '../../../../server/logger'));
 const scName = [
     '小流氓','韦春芳','双儿','鳌拜','程灵素','温仪','夏雪宜','曲霏烟','黄蓉','阿朱',
     '阿碧','王语嫣','张无忌','周芷若','小昭','小龙女','小师妹','青青','地尼','秦梦瑶',
+    '丫鬟'
 ];
 
 module.exports = async function (data) {
