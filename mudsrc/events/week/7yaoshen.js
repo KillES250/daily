@@ -45,7 +45,7 @@ module.exports = async function (data){
                 }
                 if(this.yaoshenTestNum <= 3){
                     const intervalId = setInterval(() => {
-                        if (this.userStatus.size === 0 || !this.cd.size === 0) {
+                        if (this.userStatus.size === 0 && this.cd.size === 0) {
                             this.cmd.send('tm 准备进入妖塔');
                             clearInterval(intervalId);
                         } 

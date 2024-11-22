@@ -189,6 +189,7 @@ module.exports = async function (data) {
                 this.cmd.send('tm 结束归类');
                 return;
             }
+
             this.cmd.send('tm 开始整理');
             break;
         case 'msg':

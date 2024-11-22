@@ -11,7 +11,8 @@ const { configs } = require('./configs.js');
 const app = express();
 const PORT = process.env.PORT || 3000;
 app.use(express.urlencoded({ extended: true, depth: 10, limit: '50mb' }));
-
+app.use('/', express.static(path.join(__dirname, '')));
+app.use('/tuiyan', express.static(path.join(__dirname, '../tuiyan')));
 
 // 设置路由以返回index.html
 app.get('/', (req, res) => {
