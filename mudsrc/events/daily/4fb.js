@@ -100,8 +100,10 @@ module.exports = async function (data) {
             
             if (data.data.includes('本周进入妖神禁地的次数已经达到上限。')) {
                 this.dungeonsList.jindi = null;
+                this.cmd.send(this.gameInfo.dungeonWay.start);
+                return
             }
-            else if (data.data.includes('共获得了261点妖元')) {
+            if (data.data.includes('共获得了261点妖元')) {
                 const xhjl = data.data.match(/，(\d+)精力/);
                 this.userJl = this.userJl - parseInt(xhjl[1], 10)
                 if (this.userJl > 0) {

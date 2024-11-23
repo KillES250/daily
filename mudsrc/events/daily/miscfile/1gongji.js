@@ -54,12 +54,28 @@ module.exports = async function (data) {
             }
             break;
         case 'items':
-            for (const item of data.items) {
-                if (item && !item.p && item.name.includes('后勤')) {
-                    this.mischouqin = item.id
-                    this.cmd.send(`ask1 ${item.id}`)
+            if( this.roomPath === "shashou/xiuxi" ||
+                this.roomPath === "yz/wuguan" ||
+                this.roomPath === "wd/shijie1" ||
+                this.roomPath === "shaolin/shanmen" ||
+                this.roomPath === "huashan/lianwu" ||
+                this.roomPath === "emei/zoulang2" ||
+                this.roomPath === "xiaoyao/linjian" ||
+                this.roomPath ===  "gaibang/andao2" 
+            ){
+                for (const item of data.items) {
+                    if (item && !item.p && item.name.includes('后勤')) {
+                        this.mischouqin = item.id
+                        this.cmd.send(`ask1 ${item.id}`)
+                    }
+                }
+                if (this.mischouqin){
+                    this.cmd.send(`ask1 ${this.mischouqin}`)
+                } else {
+                    this.cmd.send('jh fam 0 start;go west;go west;go north;tm 结束流程')
                 }
             }
+
             break;
         case 'msg':
             if(data.ch === 'tm' && data.content === '结束流程'){
