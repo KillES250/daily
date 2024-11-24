@@ -27,7 +27,7 @@ module.exports = async function (data) {
                 }
             }
         case 'room':
-            if(this.room=== '古大陆-平原'){
+            if(this.room === '古大陆-平原'){
                 if(this.dungeonsList.jindi){
                     this.cmd.send(this.dungeonsList.jindi);
                 }else if(this.dungeonsList.guzongmen){
@@ -70,7 +70,7 @@ module.exports = async function (data) {
                         continue;
                     }
                     if (item.name === '疯癫的老头') {
-                        if (this.dungeonsList.jindi ||this.dungeonsList.guzongmen || this.dungeonsList.yaota){
+                        if (this.dungeonsList.jindi || this.dungeonsList.guzongmen || this.dungeonsList.yaota){
                             this.cmd.send(`ggdl ${item.id}`);
                         }else{
                             this.fbnum = this.userJl / 10
@@ -97,8 +97,7 @@ module.exports = async function (data) {
             if (data.data.includes('说：')) {
                 return;
             }
-            
-            if (data.data.includes('本周进入妖神禁地的次数已经达到上限。')) {
+            if (/本周进入妖神禁地的次数已经达到上限。|你需要妖族禁地(普通)单人模式完成100%才可以扫荡副本!|你尚未完成副本妖族禁地(万年前)。/.test(data.data)){
                 this.dungeonsList.jindi = null;
                 this.cmd.send(this.gameInfo.dungeonWay.start);
                 return
