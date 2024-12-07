@@ -99,7 +99,7 @@ module.exports = async function (data) {
             }
             if (/本周进入妖神禁地的次数已经达到上限。|你需要妖族禁地(普通)单人模式完成100%才可以扫荡副本!|你尚未完成副本妖族禁地(万年前)。/.test(data.data)){
                 this.dungeonsList.jindi = null;
-                this.cmd.send('jh fam 9 start;go enter;go up;go north;go north;go north;go north;go north;go north;tiao1 shi;tiao3 shi;tiao1 shi;tiao3 shi;tiao2 shi;go north');
+                this.cmd.send(this.gameInfo.dungeonWay.start);
                 return
             }
             if (data.data.includes('共获得了261点妖元')) {
