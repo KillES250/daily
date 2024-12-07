@@ -97,7 +97,7 @@ module.exports = async function (data) {
             if (data.data.includes('说：')) {
                 return;
             }
-            if (/本周进入妖神禁地的次数已经达到上限。|你需要妖族禁地(普通)单人模式完成100%才可以扫荡副本!|你尚未完成副本妖族禁地(万年前)。/.test(data.data)){
+            if (/本周妖神禁地的次数已经达到上限。|你需要妖族禁地(普通)单人模式完成100%才可以扫荡副本!|你尚未完成副本妖族禁地(万年前)。|本周进入妖神禁地的次数已经达到上限。/.test(data.data)){
                 this.dungeonsList.jindi = null;
                 this.cmd.send(this.gameInfo.dungeonWay.start);
                 return
