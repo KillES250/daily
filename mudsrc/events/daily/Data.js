@@ -67,12 +67,10 @@ module.exports = async function (data) {
             if (data.data.includes('说：')) {
                 return;
             }
-            console.log(data.data);
             break;
         case 'room':
             this.room = data.name;
             this.roomPath = data.path;
-            console.log(data.name);
             break;
         default:
             break;

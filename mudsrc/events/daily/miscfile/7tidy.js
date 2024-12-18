@@ -25,7 +25,6 @@ module.exports = async function (data) {
         if (deepJudge === 600){ // 深度整理判定
             // 判定tidyBody中findNumOfTimes之和是否等于0，等于的话则返回一个['end']的数组
             const totalFindNumOfTimes = tidyBody.reduce((sum, item) => sum + item.findNumOfTimes, 0);
-            console.log('tidyBody中findNumOfTimes之和',totalFindNumOfTimes);
             if (totalFindNumOfTimes === 0) {
                 this.cmd.send('tm 指令已返回');
                 return ['end'];
@@ -59,14 +58,10 @@ module.exports = async function (data) {
             }, null);
             // 直接更新属性
             this.targetObjoftidy = targetObj;
-            console.log('当前最小优先级对象',this.targetObjoftidy);
             const targetItem = this.targetObjoftidy.name.data[this.targetObjoftidy.indexNum]; //从tidyBody.name拿到对象，.data拿到该对象物品数据，.indexNum为该物品数据的key值
-            console.log('当前最小优先级对象待比对物品',targetItem);
             this.targetObjoftidy.findNumOfTimes -= 1;      //对应的tidyBody对元素对象中的findNumOfTimes-1
-            console.log('当前最小优先级对象剩余查找次数',this.targetObjoftidy.findNumOfTimes);
             const targetItemName = targetItem.name.match(/[\u4e00-\u9fa5]+/g)[0];   //key值的name正则获取中文名称，因为yaml中物品数据没有录入标签
             // const targetItemName = targetItem.name.match(/<([a-z]+)>(.*?)<\/\1>/)?.[2] || '';
-            console.log('当前最小优先级对象待比对物品的中文名',targetItemName);
             const dictionaries = [this.bag, this.store, this.sc1, this.sc2, this.sc3];  //需要参与比对的词典
             for (const dict of dictionaries){   //遍历数组
                 if(dict.has(targetItemName)){   //如果Map中含有该物品的中文名
@@ -90,7 +85,6 @@ module.exports = async function (data) {
             const bagItem = tidyBody[0].name.data[tidyBody[0].indexNum] //拿到数据
             tidyBody[0].findNumOfTimes -= 1;  // 对应的tidyBody[0](this.userBag)的查找次数findNumOfTimes-1
             const store = tidyBody[1].name.data.find(storeItem  => storeItem.name === bagItem.name) //比对名字
-            console.log('当前查找位置：',tidyBody[0].indexNum,'   当前待比对物品：',bagItem.name)
             if (store) {  //如果存在，则将物品存入仓库
                 this.cmdoftidy = [`store ${bagItem.count} ${bagItem.id}`, null]
                 tidyBody[0].indexNum += 1; //查找位置加1 返回空指令执行以跳过改条
@@ -106,7 +100,6 @@ module.exports = async function (data) {
 
     //创建用于执行的执行数组的函数
     const creatcmd = (targetObj, dict, targetItem) => {
-        console.log('开始执行创建指令函数');
         this.fromIdoftidy = null;  //初始化来源id
         this.toIdoftidy = null;    //初始化目标id
         this.creatcmdoftidy = [];       //初始化cmd命令数组
@@ -114,12 +107,10 @@ module.exports = async function (data) {
         else if ( targetObj.name === this.userSc1 ) { this.fromIdoftidy = this.userSc1.id; }    // 如果数据来源是随从1，那么id来源则是随从1
         else if ( targetObj.name === this.userSc2 ) { this.fromIdoftidy = this.userSc2.id; }    // 如果数据来源是随从2，那么id来源则是随从2
         else if ( targetObj.name === this.userSc3 ) { this.fromIdoftidy = this.userSc3.id; };   // 如果数据来源是随从3，那么id来源则是随从3
-        console.log('来源id',this.fromIdoftidy);
         if ( dict === this.bag ) { this.toIdoftidy = this.userId; }                // 如果物品归属是背包，那么id归属则是玩家
         else if ( dict === this.sc1 ) { this.toIdoftidy = this.userSc1.id; }       // 如果物品归属是随从1，那么id归属则是随从1
         else if ( dict === this.sc2 ) { this.toIdoftidy = this.userSc2.id; }       // 如果物品归属是随从2，那么id归属则是随从2
         else if ( dict === this.sc3 ) { this.toIdoftidy = this.userSc3.id; };      // 如果物品归属是随从3，那么id归属则是随从3
-        console.log('目标id',this.toIdoftidy);
 
         if (this.fromIdoftidy === this.toIdoftidy){           // 如果来源与归属一致则不执行任何动作(表示该物品无需移动)
             targetObj.indexNum += 1;    // indexNum+1,下次查找时略过改物品
@@ -144,7 +135,6 @@ module.exports = async function (data) {
             this.creatcmdoftidy.push(`give ${this.toIdoftidy} ${targetItem.count} ${targetItem.id}`)
         }
         
-        console.log('即将返回指令数组',this.creatcmdoftidy);
         return this.creatcmdoftidy;     //返回指令数组
     }
     switch (data.type) {
@@ -195,7 +185,6 @@ module.exports = async function (data) {
         case 'msg':
             if(data.ch === 'tm'){
                 if(data.content === '开始整理'){
-                    // console.log('开始整理2!-----');
                     this.newCmd = cmd(this.tidyBody);
                     return;
                 }
@@ -222,7 +211,6 @@ module.exports = async function (data) {
                 // 这是为了处理当来源物品与背包物品名字一致,id不一致时,来源物品的id会改变为背包id存在背包中。导致newCmd[1]中的id不正确
                 if (this.newCmd[1] !== null) {
                     this.newCmd[1] = this.newCmd[1].replace(/(\s+\S+)$/, ` ${data.id}`);
-                    // console.log('指令以被更改为',this.newCmd[1]);
                 }
                 return;
             }

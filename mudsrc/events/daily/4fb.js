@@ -114,7 +114,6 @@ module.exports = async function (data) {
                 return;
             }
             if (/打败我|你要进入哪个副本|没有那么多的元宝|精力不够|你尚未通关弑妖塔，不能快速完成/.test(data.data)) {
-                console.log(data.data);
                 this.cmd.send('tm 结束副本流程');
                 return;
             }

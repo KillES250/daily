@@ -1,0 +1,30 @@
+pushpushpush: ''
+dailytime: ''
+wartime: ''
+weektime: ''
+roles:
+  - name: 乱吃小白白
+    server: ws://120.77.213.218:25631
+    token: >-
+      f5318124be4940db8f29347047fb3178
+      TY1c6V32zndZWtBWxHdMXWyAkSNHCauJJdcSHwcFgt19nJfVD22021VPTENNpoP0wVOpJizI0P9FB37+65PXXw==
+      bm4n1a44e1b
+    loginCommand: ''
+    logoutCommand: ''
+    canlogin: true
+    redboss: true
+    leitai: false
+    dungeons:
+      first: true
+      second: true
+      third: saodang muyuan
+      fourth: false
+    war:
+      family: false
+      gang: false
+      leader: false
+    week:
+      xiangyang: true
+      yunbiao: true
+      tazhu: true
+      yaoshen: false

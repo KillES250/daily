@@ -8,7 +8,6 @@ module.exports = async function (data) {
             break;
         case 'dialog':
             if (data.dialog === 'message' && data.items) {
-                console.log(data.items)
                 for(const item of data.items){
                     if(!item.rec){
                         this.cmd.send(`receive system ${item.index}`)

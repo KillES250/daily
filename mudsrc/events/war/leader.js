@@ -36,6 +36,11 @@ module.exports = async function (data) {
                 // 加入一个等待参者准备的等待
                 await sleep(15);
                 this.cmd.send('party fam HUASHAN');
+                if (this.warMode === 'r'){
+                    this.cmd.send('pty 开始华山红');
+                }else if (this.warMode === 'o'){
+                    this.cmd.send('pty 开始华山橙');
+                }
             }
             // 拾取分解 
             else if (data.dialog === 'pack' && data.name) {
@@ -275,7 +280,6 @@ function initWarmode() {
                     const warmode = 'o';
                     return warmode;
                 }else {
-                    console.log('未知模式');
                     return 'none';
                 }
             }

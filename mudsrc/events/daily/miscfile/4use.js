@@ -38,11 +38,9 @@ module.exports = async function (data) {
                 } 
                 // 如果当前对象有id，并且id等于用户id(判定为背包)
                 else if (currentItem.id && currentItem.id === this.userId) {
-                    console.log('进入了背包判定');
                     //通过id找到原背包对象(实例中的this)中的数据,然后删除它
                     const index = this.userBag.data.findIndex(itemData => itemData.id === item.id);
                     if (index !== -1) {
-                        console.log('删除背包数据');
                         this.userBag.data.splice(index, 1);
                     }
                     // 更新当前指令集合的内容，用于后面执行

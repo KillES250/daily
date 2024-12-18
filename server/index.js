@@ -118,7 +118,7 @@ $(document).ready(function(){
         $('#rolenName').text(data.name);
         $('#loginCommand').text(data.loginCommand);
         $('#logoutCommand').text(data.logoutCommand);
-        const redbossValue = data.redboss === null ? "null" : (data.redboss === false ? "false" : `${data.redboss}`);
+        const redbossValue = data.redboss === '' ? "null" : (data.redboss === false ? "false" : `${data.redboss}`);
         $('#redboss').val(redbossValue);
         $('#leitai').val(`${data.leitai}`);
         $('#first').val(`${data.dungeons.first}`);
@@ -136,9 +136,9 @@ $(document).ready(function(){
         $('#leader').val(`${data.war.leader}`);
         $('#xiangyang').val(`${data.week.xiangyang}`);
         $('#yunbiao').val(`${data.week.yunbiao}`);
-        const tazhuValue = data.week.tazhu === null ? "null" : (data.week.tazhu === false ? "false" : `${data.week.tazhu}`);
+        const tazhuValue = data.week.tazhu === '' ? "null" : (data.week.tazhu === false ? "false" : `${data.week.tazhu}`);
         $('#tazhu').val(tazhuValue);
-        const yaoshenValue = data.week.yaoshen === null ? "null" : (data.week.yaoshen === false ? "false" : `${data.week.yaoshen}`);
+        const yaoshenValue = data.week.yaoshen === '' ? "null" : (data.week.yaoshen === false ? "false" : `${data.week.yaoshen}`);
         $('#yaoshen').val(yaoshenValue);
     };
     // 渲染分区列表

@@ -4,7 +4,6 @@ const logger = require(path.resolve(__dirname, '../../../../server/logger'));
 module.exports = async function (data) {
     const cmd = (data) => {
         const item = data[this.booksindex]
-        console.log (item)
         if(!item){
             this.cmd.send('tm 结束流程')
             return;

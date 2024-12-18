@@ -44,7 +44,6 @@ module.exports = class Cmd {
 
     const command = this.#commandList.shift();
     this.#socket.send(command);
-    console.log(command);
     this.lastCommandTime = nowTime;
 
     logger.debug(`「${this.name}」${command}`);

@@ -24,7 +24,6 @@ module.exports = async function (data) {
                         this.cmd.send('pack');
                         this.cmd.send(familyCommand);
                     } else {
-                        console.log('查找门派发生错误,退出当前流程')
                         this.cmd.send('jh fam 0 start;go west;go west;go north;tm 结束流程')
                     }
                 } else { //不是武神境界且门贡不足15000

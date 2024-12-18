@@ -11,7 +11,6 @@ module.exports = async function (data) {
             this.cmd.send('stopstate');
             this.cmd.send(this.userConfig.loginCommand);
             if(this.userConfig.war.family === true){
-                console.log('门派模式')
                 this.emit('Data',{type:'start'});
             }else {
                 if (this.room !== '帮会-练功房') {

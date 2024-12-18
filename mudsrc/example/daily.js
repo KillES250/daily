@@ -114,6 +114,7 @@ module.exports = class Daily extends Socket {
         this.sc1 = new Map();
         this.sc2 = new Map();
         this.sc3 = new Map();
+        this.saodang = 0;
         this.getDict();
     }
 

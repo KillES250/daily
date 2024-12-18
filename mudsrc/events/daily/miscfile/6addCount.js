@@ -29,7 +29,6 @@ module.exports = async function (data) {
                     this.Yuanbao -= this.addstone.bag * 80;// 定义元宝的变化
                     this.useStoneTaget = this.userId;// 定义一个标签，用于判定石头购买谁来使用石头
                     this.userBag.count = 100;// 定义背包的变化
-                    console.log('背包升级需要购买:',this.addstone.bag);
                     this.cmd.send(`shop 2 ${this.addstone.bag}`);
                     return;
                 } 
@@ -38,7 +37,6 @@ module.exports = async function (data) {
                     this.Yuanbao -= this.addstone.sc1 * 80;// 定义元宝的变化
                     this.useStoneTaget = this.userSc1.id; // 定义一个标签，用于判定石头购买谁来使用石头
                     this.userSc1.count = 100;// 定义背包的变化
-                    console.log('随从1升级需要购买:',this.addstone.sc1);
                     this.cmd.send(`shop 2 ${this.addstone.sc1}`);
                     return;
                 } 
@@ -47,7 +45,6 @@ module.exports = async function (data) {
                     this.Yuanbao -= this.addstone.sc2 * 80;// 定义元宝的变化
                     this.useStoneTaget = this.userSc2.id;// 定义一个标签，用于判定石头购买谁来使用石头
                     this.userSc2.count = 100;// 定义背包的变化
-                    console.log('随从2升级需要购买:',this.addstone.sc2);
                     this.cmd.send(`shop 2 ${this.addstone.sc2}`)
                     return;
                 }
@@ -56,7 +53,6 @@ module.exports = async function (data) {
                     this.Yuanbao -= this.addstone.sc3 * 80;// 定义元宝的变化
                     this.useStoneTaget = this.userSc3.id;// 定义一个标签，用于判定石头购买谁来使用石头
                     this.userSc3.count = 100;// 定义背包的变化
-                    console.log('随从3升级需要购买:',this.addstone.sc3);
                     this.cmd.send(`shop 2 ${this.addstone.sc3}`)
                     return;
                 } 
@@ -66,7 +62,6 @@ module.exports = async function (data) {
                     if(this.addstone.store * 80 <= this.Yuanbao){
                         this.Yuanbao -= this.addstone.store * 80;// 定义元宝的变化
                         this.userStore.count = 200;// 定义仓库的变化
-                        console.log('仓库升级需要购买:',this.addstone.store);
                         this.cmd.send(`shop 3 ${this.addstone.store}`);
                         return;
                     } 
@@ -74,7 +69,6 @@ module.exports = async function (data) {
                         const baixing = Math.floor(this.addstone.store / 2)
                         this.Yuanbao -= baixing * 80;// 定义元宝的变化
                         this.userStore.count = this.userStore.count + baixing * 10;// 定义仓库的变化
-                        console.log('仓库升级需要购买:',this.addstone.store);
                         this.cmd.send(`shop 3 ${baixing}`);
                         return;
                     }
