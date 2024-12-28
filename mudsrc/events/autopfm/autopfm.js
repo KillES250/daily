@@ -110,7 +110,19 @@ module.exports = async function (data){
                 'throwing.luo': 6,
                 'sword.ji': 6,
             };
-            const banSkills = ['force.tuoli', 'unarmed.ref', 'force.jiu', 'force.xi', 'force.hama','unarmed.zuo','dodge.yao','unarmed.luo'];
+            const banSkills = [
+                'force.tuoli', 
+                'unarmed.ref', 
+                'force.jiu', 
+                'force.xi', 
+                'force.hama',
+                'unarmed.zuo',
+                'dodge.yao',
+                'unarmed.luo',
+                'blade.duo',
+                'unarmed.duo',
+                'sword.duo'
+            ];
             this.userSkills = Array.from(data.skills, (item) => item.id);
             this.userSkills = this.userSkills.sort((a, b) => {
                 const skillsAPriority = skillPriority[a] ? skillPriority[a] : 9;

@@ -21,6 +21,9 @@ module.exports = async function (data) {
                 this.warMode = initWarmode();
                 if (this.warMode === 'r'){
                     this.cmd.send('enable blade yuanyuewandao');
+                    //防止卡在妖塔什么奇奇怪怪的地方
+                    this.cmd.send('lkfb ok')
+                    this.cmd.send('cr over')
                     this.startKill = true;
                 }else if (this.warMode === 'o'){
                     this.cmd.send('enable blade xiuluodao');
