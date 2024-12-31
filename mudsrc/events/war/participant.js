@@ -71,7 +71,7 @@ module.exports = async function (data) {
                 for(const key in data.items){
                     const item = data.items[key];
                     if(item && item.name.includes('的尸体') && !item.p){
-                        this.cmd.send(`get all form ${item.id}`);
+                        this.cmd.send(`get all from ${item.id}`);
                     }
                 };
                 // 回到房间的时候如果败天存在，则下杀败天，否则等待眩晕
