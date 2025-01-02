@@ -137,6 +137,8 @@ module.exports = async function (data){
                         this.cmd.send('enable parry qiankundanuoyii')
                         this.cmd.send(`enable parry ${this.userId}`)
                         this.cmd.send('tm 结束妖神流程')
+                    } else {
+                        this.cmd.send('tm 结束妖神流程')
                     }
                     return;
                 }
