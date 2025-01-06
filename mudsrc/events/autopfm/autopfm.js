@@ -29,14 +29,14 @@ module.exports = async function (data){
             clearInterval(this.timers.pfm);
             clearInterval(this.timers.up);
             this.userStatus = new Set();
-            this.combatFailedNum++;
+            this.combatFailedNum ? this.combatFailedNum++ :"";
             if (this.room && this.room.includes('副本区域')){
                 await sleep(1);
                 this.cmd.send('shop 1 1;relive locale')
             }else {
                 this.cmd.send('relive');
             }
-            if(this.war === 'start'){
+            if(this.war && this.war === 'start'){
                 this.cmd.send(this.gameInfo.war.way);
             }
             break;
@@ -67,14 +67,16 @@ module.exports = async function (data){
             break;
         case 'perform':
             // 是否要吃玄灵丹判定
-            for (const key in data.skills){
-                const skill = data.skills[key];
-                if(skill.name === '剑心通明' || skill.name === '定乾坤' || skill.name === '天地决' || skill.name === '一念轮回'){
-                    this.canSeamless = skill.distime > 10000 ? false : true;
+            if ( this.canSeamless !== undefined){
+                for (const key in data.skills){
+                    const skill = data.skills[key];
+                    if(skill.name === '剑心通明' || skill.name === '定乾坤' || skill.name === '天地决' || skill.name === '一念轮回'){
+                        this.canSeamless = skill.distime > 10000 ? false : true;
+                    }
                 }
             }
-            
-            if (this.userConfig.redboss === false){
+
+            if (this.userConfig.redboss === false && this.tanlong !== undefined){
                 data.skills.forEach(item => {
                     if(item.name === '探龙'){
                         this.tanlong = item.id;
