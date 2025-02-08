@@ -54,10 +54,14 @@ module.exports = function (data) {
                         this.combatFailedNum = 0;
                         this.cmd.send(this.gameInfo.hunt.way);
                     } else {
-                        this.huntTaskInfo.nowTaskWay = JSON.parse(
-                            JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
-                        );
-                        this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+                        if (this.huntTaskInfo.place !== null) {
+                            this.huntTaskInfo.nowTaskWay = JSON.parse(
+                                JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
+                            );
+                            this.cmd.send(this.huntTaskInfo.nowTaskWay.shift());
+                        } else {
+                            this.cmd.send(this.gameInfo.hunt.way);
+                        }
                     }
                 }, 40000);
             }
