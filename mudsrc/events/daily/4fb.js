@@ -38,14 +38,11 @@ module.exports = async function (data) {
                 return;
             }
             if(this.room === '古大陆-破碎通道'){
-                this.cmd.send(`shop 0 2;cr yzjd/pingyuan 0 2`);
-                this.userJl = this.userJl - 200
-                this.dungeonsList.jindi = null;
+                this.cmd.send('go north')
                 return;
             }
             if (this.roomPath === 'zc/shanjiao'){
                 this.cmd.send(`shop 0 5;cr gmp/shanmen 0 5`);
-                this.userJl = this.userJl - 50
                 this.dungeonsList.guzongmen = null;
                 return;
             }
@@ -117,8 +114,23 @@ module.exports = async function (data) {
                 this.cmd.send('tm 结束副本流程');
                 return;
             }
+            if (data.data.includes('即将进入副本(妖族禁地)区域')) {
+                this.cmd.send(`shop 0 2;cr yzjd/pingyuan 0 2`);
+                return;
+            }
             if (data.data.includes('扫荡完成')){
-                if(this.roomPath === 'zc/shanjiao' || this.room === '古大陆-破碎通道'){
+                // if(this.roomPath === 'zc/shanjiao' || this.room === '古大陆-破碎通道'){
+                //     this.cmd.send(this.gameInfo.dungeonWay.start);
+                // } else {
+                //     this.cmd.send(`jh fam 0 start;go south;go east;sell all`);
+                //     this.cmd.send('tm 结束副本流程')
+                // }
+                if (this.room === '古大陆-破碎通道'){
+                    this.userJl = this.userJl - 200
+                    this.dungeonsList.jindi = null;
+                    this.cmd.send(this.gameInfo.dungeonWay.start);
+                } else if (this.roomPath === 'zc/shanjiao'){
+                    this.userJl = this.userJl - 50
                     this.cmd.send(this.gameInfo.dungeonWay.start);
                 } else {
                     this.cmd.send(`jh fam 0 start;go south;go east;sell all`);
