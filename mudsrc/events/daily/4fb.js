@@ -38,7 +38,7 @@ module.exports = async function (data) {
                 return;
             }
             if(this.room === '古大陆-破碎通道'){
-                this.cmd.send('go north')
+                this.cmd.send('go south')
                 return;
             }
             if (this.roomPath === 'zc/shanjiao'){
