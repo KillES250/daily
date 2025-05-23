@@ -63,6 +63,7 @@ module.exports = class Week extends Socket {
         this.kongmingquan = false;
         this.skillsToYaoShen = ['force.xin', 'force.ding', 'force.zhen', 'parry.dao','force.power','force.busi'];
         this.tiejiang = null;
+        this.roomTimer = null;
         this.weeklist = this.allTask();
 
     }

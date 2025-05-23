@@ -116,6 +116,8 @@ module.exports = class Daily extends Socket {
         this.sc3 = new Map();
         this.saodang = 0;
         this.getDict();
+
+        this.roomTimer = null;
     }
 
     loadEvents() {

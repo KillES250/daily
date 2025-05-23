@@ -1,15 +1,11 @@
 const path = require('path');
 const logger = require(path.resolve(__dirname, '../../../server/logger'));
+const start = require('../start/start.js');
 
 module.exports = async function (data) {
     switch (data.type) {
         case 'login':
-            logger.success(`「${this.userConfig.name}」登录成功`);
-            // 关闭自动出招、自动反击、自动工作。开启自动拾取
-            this.cmd.send('setting auto_pfm 0;setting auto_pfm2 0;setting auto_work 0;setting auto_get 1');
-            this.cmd.send('relive;cr over')
-            this.cmd.send('stopstate');
-            this.cmd.send(this.userConfig.loginCommand);
+            start();
             if(this.userConfig.war.family === true){
                 this.emit('Data',{type:'start'});
             }else {

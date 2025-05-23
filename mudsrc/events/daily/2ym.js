@@ -113,7 +113,7 @@ module.exports = function (data) {
                 }, 3e4);
             }
             
-            if (data.data.includes('你要攻击谁')) {
+            if (data.data.includes('你要攻击谁') && this.gameInfo.hunt.path[this.huntTaskInfo.place]) {
                 this.huntTaskInfo.nowTaskWay = JSON.parse(
                     JSON.stringify(this.gameInfo.hunt.path[this.huntTaskInfo.place].split(';')),
                 );
