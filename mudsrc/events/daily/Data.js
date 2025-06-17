@@ -7,7 +7,7 @@ const pushMsg = require(path.resolve(__dirname, '../../../server/pushplus'));
 module.exports = async function (data) {
     switch (data.type) {
         case 'login':
-            start();
+            start(this.userConfig,this.cmd);
             this.cmd.send('score');
             await sleep(3)
             this.cmd.send('tasks')
