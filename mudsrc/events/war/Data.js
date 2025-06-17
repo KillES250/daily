@@ -5,7 +5,7 @@ const start = require('../start/start.js');
 module.exports = async function (data) {
     switch (data.type) {
         case 'login':
-            start();
+            start(this.userConfig,this.cmd);
             if(this.userConfig.war.family === true){
                 this.emit('Data',{type:'start'});
             }else {
